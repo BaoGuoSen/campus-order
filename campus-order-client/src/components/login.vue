@@ -38,6 +38,25 @@ export default {
           .then(res => {
             if (res.data !== '') {
               console.log('登录成功')
+              // document.cookie = 'userId = ' + res.data.id
+              // document.cookie = 'userType = ' + res.data.userType
+              // console.log(document.cookie)
+              localStorage.setItem('userId', res.data.id)
+              localStorage.setItem('userType', res.data.userType)
+              let userType = res.data.userType
+              if (userType === '1') {
+                this.$router.push({
+                  path: 'store',
+                  query: {}
+                })
+              } else if (userType === '2') {
+
+              } else {
+                this.$router.push({
+                  path: 'customer',
+                  query: {}
+                })
+              }
             } else {
               this.$message.error('用户名或密码错误，请重新输入')
             }
@@ -45,6 +64,24 @@ export default {
           .catch(e => {
             this.$message.error(e.status + ' ' + e.error)
           })
+      }
+    }
+  },
+  mounted () {
+    if (localStorage.getItem('userId')) {
+      let userType = localStorage.getItem('userType')
+      if (userType === '1') {
+        this.$router.push({
+          path: '/store',
+          query: {}
+        })
+      } else if (userType === '2') {
+
+      } else {
+        this.$router.push({
+          path: '/customer',
+          query: {}
+        })
       }
     }
   }

@@ -22,6 +22,21 @@ axios.interceptors.response.use(response => {
   }
 })
 /* eslint-disable no-new */
+
+// 路由权限控制
+const userType = localStorage.getItem('userType')
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (to.meta.userTypes.includes(userType)) {
+      next()
+    } else {
+      console.log('路由拦截')
+    }
+  } else {
+    next()
+  }
+})
+
 new Vue({
   el: '#app',
   router,
