@@ -1,16 +1,18 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.user;
 import com.example.demo.service.userService;
 
-
 @RestController
+@RequestMapping(value="user")
 public class userController {
 	@Autowired
 	private userService userService;
@@ -46,6 +48,18 @@ public class userController {
 		} else {
 			return finUser;
 		}
+	}
+	
+	@PostMapping("/update")
+	public user update(@RequestBody user user) {
+		try {
+			userService.update(user);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e);
+			return null;
+		}
+		return user;
 	}
 	
 }

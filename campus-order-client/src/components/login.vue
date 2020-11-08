@@ -7,7 +7,7 @@
         <el-input v-model="user.userName"  placeholder="userName" autocomplete="on"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-input v-model="user.password"  placeholder="password" autocomplete="off" type="password"></el-input>
+        <el-input v-model="user.password"  placeholder="password" @keydown.enter.native="login" type="password"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="login"  style="width:300px;">登录</el-button>
@@ -34,7 +34,7 @@ export default {
         this.$message.error('请输入用户名或者密码')
       } else {
         this.$axios
-          .post('api/login', this.user)
+          .post('api/user/login', this.user)
           .then(res => {
             if (res.data !== '') {
               console.log('登录成功')
@@ -43,20 +43,10 @@ export default {
               // console.log(document.cookie)
               localStorage.setItem('userId', res.data.id)
               localStorage.setItem('userType', res.data.userType)
+              localStorage.setItem('userName', res.data.userName)
+              localStorage.setItem('userLocation', res.data.location)
               let userType = res.data.userType
-              if (userType === '1') {
-                this.$router.push({
-                  path: 'store',
-                  query: {}
-                })
-              } else if (userType === '2') {
-
-              } else {
-                this.$router.push({
-                  path: 'customer',
-                  query: {}
-                })
-              }
+              this.getStore(res.data.id, userType)
             } else {
               this.$message.error('用户名或密码错误，请重新输入')
             }
@@ -65,21 +55,58 @@ export default {
             this.$message.error(e.status + ' ' + e.error)
           })
       }
+    },
+    getStore (ownerId, userType) {
+      this.$axios
+        .get('api/store/getStoreById', {
+          params: {
+            ownerId: ownerId
+          }
+        })
+        .then(res => {
+          if (userType === 1 && !res.data) {
+            this.$router.push({
+              name: 'storeInfo',
+              params: {
+                type: 'create'
+              }
+            })
+          }
+          this.store = res.data
+          localStorage.setItem('storeId', res.data.id)
+          if (userType === 1) {
+            this.$router.push({
+              path: '/store/ownDishs',
+              query: {}
+            })
+          } else if (userType === 2) {
+
+          } else {
+            this.$router.push({
+              path: '/customer/allDishs',
+              query: {}
+            })
+          }
+        })
+        .catch(e => {
+          this.$message.error(e.status + ' ' + e.error)
+        })
     }
   },
   mounted () {
     if (localStorage.getItem('userId')) {
       let userType = localStorage.getItem('userType')
+      console.log(typeof userType)
       if (userType === '1') {
         this.$router.push({
-          path: '/store',
+          path: '/store/ownDishs',
           query: {}
         })
       } else if (userType === '2') {
 
       } else {
         this.$router.push({
-          path: '/customer',
+          path: '/customer/allDishs',
           query: {}
         })
       }

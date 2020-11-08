@@ -8,4 +8,5 @@ import com.example.demo.entity.user;
 public interface userMapper {
 	void register(user user);
 	user findUser(String userName);
+	void update(user user);
 }

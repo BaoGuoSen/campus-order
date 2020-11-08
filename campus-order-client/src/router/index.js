@@ -4,11 +4,15 @@ import Router from 'vue-router'
 const index = () => import('@/view/index')
 const customer = () => import('@/view/customer')
 const store = () => import('@/view/store')
+const refuse = () => import('@/view/403')
+const storeInfo = () => import('@/view/storeInfo')
 
 const login = () => import('@/components/login')
 const chooseUserType = () => import('@/components/chooseUserType')
 const register = () => import('@/components/register')
-
+const ownDishs = () => import('@/components/ownDishs')
+const allDishs = () => import('@/components/allDishs')
+const orderList = () => import('@/components/orderList')
 Vue.use(Router)
 
 export default new Router({
@@ -16,6 +20,11 @@ export default new Router({
     {
       path: '/',
       redirect: '/index/login'
+    },
+    {
+      path: '/403',
+      name: '403',
+      component: refuse
     },
     {
       path: '/index',
@@ -46,7 +55,14 @@ export default new Router({
         userTypes: ['3', '4'],
         requireAuth: true
       },
-      component: customer
+      component: customer,
+      children: [
+        {
+          path: 'allDishs',
+          name: 'allDishs',
+          component: allDishs
+        }
+      ]
     },
     {
       path: '/store',
@@ -55,7 +71,28 @@ export default new Router({
         userTypes: ['1'],
         requireAuth: true
       },
-      component: store
+      component: store,
+      children: [
+        {
+          path: 'ownDishs',
+          name: 'ownDishs',
+          component: ownDishs
+        },
+        {
+          path: 'orderList',
+          name: 'orderList',
+          component: orderList
+        }
+      ]
+    },
+    {
+      path: '/storeInfo',
+      name: 'storeInfo',
+      meta: {
+        userTypes: ['1'],
+        requireAuth: true
+      },
+      component: storeInfo
     }
   ]
 })

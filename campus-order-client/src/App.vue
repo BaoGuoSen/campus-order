@@ -18,4 +18,13 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.el-submenu__title {
+  text-align: left;
+}
+.el-menu-item {
+  text-align: left;
+}
+.el-menu .el-menu--inline .el-menu-item{
+  text-align: center;
+}
 </style>

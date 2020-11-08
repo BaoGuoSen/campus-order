@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.example.demo.dao.storeMapper">
+ 
+ 	<select id="getStoreById" resultType="com.example.demo.entity.store">
+        select * from store where ownerId=#{ownerId}
+    </select>
+    
+    <select id="getDishsByStoreId" resultType="com.example.demo.entity.dish">
+        select * from dish where storeId=#{storeId} order by sellCount DESC
+    </select>
+    
+    <select id="getAllDishs" resultType="com.example.demo.entity.dish">
+        select * from dish order by sellCount DESC
+    </select>
+    
+    <select id="searchByValue" resultType="com.example.demo.entity.dish">
+		select * from dish where name LIKE CONCAT('%',#{value},'%') order by sellCount DESC
+	</select>
+	
+	<insert id="register" useGeneratedKeys="true" parameterType="com.example.demo.entity.store">
+		insert into store 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+           id,name,src,location,ownerId,ownerName,income,registerTime,info
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        		#{id, jdbcType=VARCHAR},
+        		#{name, jdbcType=VARCHAR},
+               	#{src, jdbcType=VARCHAR},
+               	#{location, jdbcType=VARCHAR},
+    		   	#{ownerId, jdbcType=VARCHAR},
+    		   	#{ownerName, jdbcType=VARCHAR},
+    		   	#{income, jdbcType=FLOAT},
+    		   	#{registerTime, jdbcType=VARCHAR},
+    		   	#{info, jdbcType=VARCHAR}
+        </trim>
+	</insert>
+	
+	<insert id="addDish" useGeneratedKeys="true" parameterType="com.example.demo.entity.dish">
+		insert into dish
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+           id,src,name,price,sellCount,storeId
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        		#{id, jdbcType=VARCHAR},
+               	#{src, jdbcType=VARCHAR},
+               	#{name, jdbcType=VARCHAR},
+               	#{price, jdbcType=FLOAT},
+    		   	#{sellCount, jdbcType=INTEGER},
+    		   	#{storeId, jdbcType=VARCHAR}
+        </trim>
+	</insert>
+	
+	<update id="updateDish" parameterType="com.example.demo.entity.dish">
+		update dish
+		<set>
+			name=#{name, jdbcType=VARCHAR},
+			src=#{src,jdbcType=VARCHAR},
+			price=#{price, jdbcType=FLOAT},
+			sellCount=#{sellCount, jdbcType=INTEGER}
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateStore" parameterType="com.example.demo.entity.store">
+		update store
+		<set>
+			src=#{src, jdbcType=VARCHAR},
+			name=#{name, jdbcType=VARCHAR},
+			info=#{info, jdbcType=VARCHAR}
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<delete id="deleteDish" parameterType="com.example.demo.entity.dish">
+		delete from dish where id = #{id, jdbcType=VARCHAR}
+	</delete>
+ </mapper>

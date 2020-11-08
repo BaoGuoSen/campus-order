@@ -18,4 +18,13 @@
     		   #{userType, jdbcType=INTEGER},
         </trim>
 	</insert>
+	
+	<update id="update" parameterType="com.example.demo.entity.user">
+		update user
+		<set>
+			userName=#{userName, jdbcType=VARCHAR},
+			location=#{location,jdbcType=VARCHAR}
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
  </mapper>

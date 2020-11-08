@@ -24,13 +24,14 @@ axios.interceptors.response.use(response => {
 /* eslint-disable no-new */
 
 // 路由权限控制
-const userType = localStorage.getItem('userType')
 router.beforeEach((to, from, next) => {
+  const userType = localStorage.getItem('userType')
   if (to.meta.requireAuth) {
-    if (to.meta.userTypes.includes(userType)) {
+    if (to.meta && to.meta.userTypes.includes(userType)) {
       next()
     } else {
-      console.log('路由拦截')
+      console.log(to.meta.userTypes.includes(userType), userType, to.meta.userTypes)
+      next({path: '/403'})
     }
   } else {
     next()

@@ -75,7 +75,7 @@ export default {
           this.user.id = shortid.generate()
           this.user.userType = this.$route.query.userType
           this.$axios
-            .post('api/register', this.user)
+            .post('api/user/register', this.user)
             .then(res => {
               if (res.data === true) {
                 this.$message({

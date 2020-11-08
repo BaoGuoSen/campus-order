@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.example.demo.dao.orderMapper">
+ 
+ 	<select id="getAllOrder" resultType="com.example.demo.entity.order">
+        select * from dishOrder
+    </select>
+    
+    <select id="getOrderByStoreId" resultType="com.example.demo.entity.order">
+        select * from dishOrder where storeId=#{storeId}
+    </select>
+    
+    <select id="getOrderByDishId" resultType="com.example.demo.entity.order">
+        select * from dishOrder where dishId=#{dishId}
+    </select>
+    
+   	<select id="getOrderByCustomerId" resultType="com.example.demo.entity.order">
+        select * from dishOrder where customerId=#{customerId}
+    </select>
+    
+    <select id="searchById" resultType="com.example.demo.entity.order">
+		select * from dishOrder where id LIKE CONCAT('%',#{id},'%') and storeId=#{storeId}
+	</select>
+	
+	<select id="searchByCustomerName" resultType="com.example.demo.entity.order">
+		select * from dishOrder where customerName LIKE CONCAT('%',#{customerName},'%') and storeId=#{storeId}
+	</select>
+    
+	<insert id="addOrder" useGeneratedKeys="true" parameterType="com.example.demo.entity.order">
+		insert into dishOrder 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+           id,dishId,storeId,startTime,dishName,storeName,note,amount,customerId,customerName,customerEvaluate,
+           rate,riderId,endTime,riderName
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        		#{id, jdbcType=VARCHAR},
+        		#{dishId, jdbcType=VARCHAR},
+               	#{storeId, jdbcType=VARCHAR},
+               	#{startTime, jdbcType=VARCHAR},
+    		   	#{dishName, jdbcType=VARCHAR},
+    		   	#{storeName, jdbcType=VARCHAR},
+    		   	#{note, jdbcType=VARCHAR},
+    		   	#{amount, jdbcType=FLOAT},
+    		   	#{customerId, jdbcType=VARCHAR},
+    		   	#{customerName, jdbcType=VARCHAR},
+    		   	#{customerEvaluate, jdbcType=VARCHAR},
+    		   	#{rate, jdbcType=VARCHAR},
+    		   	#{riderId, jdbcType=VARCHAR},
+    		   	#{endTime, jdbcType=VARCHAR},
+    		   	#{riderName, jdbcType=VARCHAR}
+        </trim>
+	</insert>
+	
+	<delete id="deleteOrder" parameterType="com.example.demo.entity.order">
+		delete from dishOrder where id = #{id, jdbcType=VARCHAR}
+	</delete>
+ </mapper>

@@ -25,4 +25,10 @@ public class userServiceImpl implements userService{
 		return user;
 	}
 
+	@Override
+	public void update(user user) {
+		// TODO Auto-generated method stub
+		userMapper.update(user);
+	}
+
 }
