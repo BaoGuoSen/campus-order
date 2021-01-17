@@ -9,17 +9,25 @@ import com.example.demo.entity.store;
 
 @Mapper
 public interface storeMapper {
-	//增
+	// 增
 	void register(store store);
+
 	void addDish(dish dish);
-	//删
+
+	// 删
 	void deleteDish(dish dish);
-	//改
+
+	// 改
 	void updateDish(dish dish);
+
 	void updateStore(store store);
-	//查
+
+	// 查
 	store getStoreById(String ownerId);
+
 	List<dish> getDishsByStoreId(String storeId);
+
 	List<dish> searchByValue(String value);
+
 	List<dish> getAllDishs();
 }

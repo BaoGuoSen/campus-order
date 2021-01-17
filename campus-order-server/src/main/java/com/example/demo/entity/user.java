@@ -6,10 +6,11 @@ public class user {
 	public String password;
 	public int userType;
 	public String location;
+
 	public user() {
 		super();
 	}
-	
+
 	public user(String id, String userName, String password, int userType, String location) {
 		super();
 		this.id = id;
@@ -18,7 +19,7 @@ public class user {
 		this.userType = userType;
 		this.location = location;
 	}
-	
+
 	public user(String id, String userName, String password, int userType) {
 		super();
 		this.id = id;
@@ -96,5 +97,5 @@ public class user {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	
+
 }

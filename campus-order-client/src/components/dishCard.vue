@@ -115,11 +115,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '支付成功!'
-        })
-        this.addOrder()
+        // this.addOrder()
+        this.alipay()
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -138,6 +135,19 @@ export default {
           })
           this.dish.sellCount = this.dish.sellCount + 1
           this.update()
+        })
+        .catch(e => {
+          this.$message.error(e.status + ' ' + e.error)
+        })
+    },
+    alipay () {
+      this.$axios
+        .post('api/pay/confirm', this.dish)
+        .then(res => {
+          document.body.innerHTML = res.data
+          this.$nextTick(() => {
+            document.forms[0].submit()
+          })
         })
         .catch(e => {
           this.$message.error(e.status + ' ' + e.error)

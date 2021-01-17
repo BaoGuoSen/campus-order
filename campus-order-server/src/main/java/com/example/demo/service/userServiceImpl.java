@@ -7,14 +7,14 @@ import com.example.demo.dao.userMapper;
 import com.example.demo.entity.user;
 
 @Service
-public class userServiceImpl implements userService{
+public class userServiceImpl implements userService {
 	@Autowired
 	private userMapper userMapper;
-	
+
 	@Override
 	public void register(user user) {
 		// TODO Auto-generated method stub
-		
+
 		userMapper.register(user);
 	}
 

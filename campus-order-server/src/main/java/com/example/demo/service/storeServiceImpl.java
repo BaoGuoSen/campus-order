@@ -10,11 +10,11 @@ import com.example.demo.entity.dish;
 import com.example.demo.entity.store;
 
 @Service
-public class storeServiceImpl implements storeService{
-	
+public class storeServiceImpl implements storeService {
+
 	@Autowired
 	private storeMapper storeMapper;
-	
+
 	@Override
 	public void register(store store) {
 		// TODO Auto-generated method stub

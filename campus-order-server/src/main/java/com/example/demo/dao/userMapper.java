@@ -7,6 +7,8 @@ import com.example.demo.entity.user;
 @Mapper
 public interface userMapper {
 	void register(user user);
+
 	user findUser(String userName);
+
 	void update(user user);
 }

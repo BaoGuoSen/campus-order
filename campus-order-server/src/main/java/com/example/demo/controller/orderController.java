@@ -12,11 +12,11 @@ import com.example.demo.entity.order;
 import com.example.demo.service.orderService;
 
 @RestController
-@RequestMapping(value="order")
+@RequestMapping(value = "order")
 public class orderController {
 	@Autowired
 	private orderService orderService;
-	
+
 	@PostMapping("/addOrder")
 	public order addOrder(@RequestBody order order) {
 		System.out.println(order.getId());
@@ -29,7 +29,7 @@ public class orderController {
 		}
 		return order;
 	}
-	
+
 	@PostMapping("/deleteOrder")
 	public order deleteOrder(@RequestBody order order) {
 		try {
@@ -40,34 +40,34 @@ public class orderController {
 		}
 		return order;
 	}
-	
+
 	@GetMapping("/getAllOrder")
 	public List<order> getAllDishs() {
 		return orderService.getAllOrder();
 	}
-	
+
 	@GetMapping("/getOrderByCustomerId")
 	public List<order> getOrderByCustomerId(String customerId) {
 		return orderService.getOrderByCustomerId(customerId);
 	}
-	
+
 	@GetMapping("/getOrderByStoreId")
 	public List<order> getOrderByStoreId(String storeId) {
 		return orderService.getOrderByStoreId(storeId);
 	}
-	
+
 	@GetMapping("/getOrderByDishId")
 	public List<order> getOrderByDishId(String dishId) {
 		return orderService.getOrderByDishId(dishId);
 	}
-	
+
 	@GetMapping("/searchById")
-	public List<order> searchById(String id,String storeId) {
-		return orderService.searchById(id,storeId);
+	public List<order> searchById(String id, String storeId) {
+		return orderService.searchById(id, storeId);
 	}
-	
+
 	@GetMapping("/searchByCustomerName")
-	public List<order> searchByCustomerName(String customerName,String storeId) {
-		return orderService.searchByCustomerName(customerName,storeId);
+	public List<order> searchByCustomerName(String customerName, String storeId) {
+		return orderService.searchByCustomerName(customerName, storeId);
 	}
 }

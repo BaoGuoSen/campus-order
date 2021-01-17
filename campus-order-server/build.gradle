@@ -27,7 +27,11 @@ dependencies {
 
     //使用 Controller 的时候需要引入 web 包
      compile('org.springframework.boot:spring-boot-starter-web')
-
+     
+	 compile('org.springframework.security:spring-security-core')
+	 
+	// 阿里支付宝依赖
+	 compile('com.alipay.sdk:alipay-easysdk:2.0.2')
 }
 
 test {

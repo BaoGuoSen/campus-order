@@ -9,11 +9,11 @@ import com.example.demo.dao.orderMapper;
 import com.example.demo.entity.order;
 
 @Service
-public class orderServiceImpl implements orderService{
-	
+public class orderServiceImpl implements orderService {
+
 	@Autowired
 	private orderMapper orderMapper;
-	
+
 	@Override
 	public void addOrder(order order) {
 		// TODO Auto-generated method stub
@@ -52,15 +52,15 @@ public class orderServiceImpl implements orderService{
 	}
 
 	@Override
-	public List<order> searchById(String id,String storeId) {
+	public List<order> searchById(String id, String storeId) {
 		// TODO Auto-generated method stub
-		return orderMapper.searchById(id,storeId);
+		return orderMapper.searchById(id, storeId);
 	}
 
 	@Override
-	public List<order> searchByCustomerName(String customerName,String storeId) {
+	public List<order> searchByCustomerName(String customerName, String storeId) {
 		// TODO Auto-generated method stub
-		return orderMapper.searchByCustomerName(customerName,storeId);
+		return orderMapper.searchByCustomerName(customerName, storeId);
 	}
-	
+
 }

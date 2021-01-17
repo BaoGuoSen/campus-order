@@ -14,11 +14,11 @@ import com.example.demo.entity.store;
 import com.example.demo.service.storeService;
 
 @RestController
-@RequestMapping(value="store")
+@RequestMapping(value = "store")
 public class storeController {
 	@Autowired
 	private storeService storeService;
-	
+
 	@PostMapping("/register")
 	public boolean register(@RequestBody store store) {
 		try {
@@ -29,7 +29,7 @@ public class storeController {
 		}
 		return true;
 	}
-	
+
 	@PostMapping("/addDish")
 	public boolean addDish(@RequestBody dish dish) {
 		try {
@@ -40,7 +40,7 @@ public class storeController {
 		}
 		return true;
 	}
-	
+
 	@PostMapping("/deleteDish")
 	public boolean deleteDish(@RequestBody dish dish) {
 		try {
@@ -51,7 +51,7 @@ public class storeController {
 		}
 		return true;
 	}
-	
+
 	@PostMapping("/updateDish")
 	public dish updateDish(@RequestBody dish dish) {
 		try {
@@ -62,7 +62,7 @@ public class storeController {
 		}
 		return dish;
 	}
-	
+
 	@PostMapping("/updateStore")
 	public store updateStore(@RequestBody store store) {
 		try {
@@ -73,22 +73,22 @@ public class storeController {
 		}
 		return store;
 	}
-	
+
 	@GetMapping("/getStoreById")
 	public store getStoreById(String ownerId) {
 		return storeService.getStoreById(ownerId);
 	}
-	
+
 	@GetMapping("/getDishsByStoreId")
 	public List<dish> getDishsByStoreId(String storeId) {
 		return storeService.getDishsByStoreId(storeId);
 	}
-	
+
 	@GetMapping("/searchByValue")
 	public List<dish> searchByValue(String value) {
 		return storeService.searchByValue(value);
 	}
-	
+
 	@GetMapping("/getAllDishs")
 	public List<dish> getAllDishs() {
 		return storeService.getAllDishs();
