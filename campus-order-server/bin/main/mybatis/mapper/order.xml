@@ -51,6 +51,14 @@
         </trim>
 	</insert>
 	
+	<update id="updateOrderPayStatus" parameterType="com.example.demo.entity.order">
+		update dishOrder
+		<set>
+			isPay = 1
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
 	<delete id="deleteOrder" parameterType="com.example.demo.entity.order">
 		delete from dishOrder where id = #{id, jdbcType=VARCHAR}
 	</delete>

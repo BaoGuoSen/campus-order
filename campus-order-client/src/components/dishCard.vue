@@ -57,7 +57,6 @@
   </el-card>
 </template>
 <script>
-const shortid = require('shortid')
 export default {
   name: '',
   props: {
@@ -85,7 +84,6 @@ export default {
       fit: 'cover',
       dialogVisible: false,
       order: {
-        id: '',
         dishId: '',
         storeId: '',
         customerId: ''
@@ -109,21 +107,21 @@ export default {
     handleExceed (files, fileList) {
       this.$message.warning(`当前限制选择 1 个文件，请将当前文件删除后在执行上传操作`)
     },
-    apply () {
-      this.$confirm('您将支付' + this.dish.price + '元，是否支付?', '提示', {
-        confirmButtonText: '支付',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        // this.addOrder()
-        this.alipay()
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消支付'
-        })
-      })
-    },
+    // 由后端在addorder后直接调用
+    // apply () {
+    //   this.$confirm('您将支付' + this.dish.price + '元，是否支付?', '提示', {
+    //     confirmButtonText: '支付',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }).then(() => {
+    //     this.addOrder()
+    //   }).catch(() => {
+    //     this.$message({
+    //       type: 'info',
+    //       message: '已取消支付'
+    //     })
+    //   })
+    // },
     addOrder () {
       this.orderInit()
       this.$axios
@@ -132,6 +130,10 @@ export default {
           this.$message({
             message: '下单成功',
             type: 'success'
+          })
+          document.body.innerHTML = res.data
+          this.$nextTick(() => {
+            document.forms[0].submit()
           })
           this.dish.sellCount = this.dish.sellCount + 1
           this.update()
@@ -163,7 +165,6 @@ export default {
         })
     },
     orderInit () {
-      this.order.id = shortid.generate()
       this.order.dishId = this.dish.id
       this.order.storeId = this.dish.storeId
       this.order.customerId = localStorage.getItem('userId')

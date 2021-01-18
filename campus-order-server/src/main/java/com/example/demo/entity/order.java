@@ -16,6 +16,7 @@ public class order {
 	private String riderId;
 	private String endTime;
 	private String riderName;
+	private int isPay;
 
 	public order() {
 		super();
@@ -23,7 +24,7 @@ public class order {
 
 	public order(String id, String dishId, String storeId, String startTime, String dishName, String storeName,
 			String note, float amount, String customerId, String customerName, String customerEvaluate, String rate,
-			String riderId, String endTime, String riderName) {
+			String riderId, String endTime, String riderName,int isPay) {
 		super();
 		this.id = id;
 		this.dishId = dishId;
@@ -40,6 +41,7 @@ public class order {
 		this.riderId = riderId;
 		this.endTime = endTime;
 		this.riderName = riderName;
+		this.isPay = isPay;
 	}
 
 	/**
@@ -252,4 +254,18 @@ public class order {
 		this.riderName = riderName;
 	}
 
+	/**
+	 * @return the isPay
+	 */
+	public int getIsPay() {
+		return isPay;
+	}
+
+	/**
+	 * @param isPay the isPay to set
+	 */
+	public void setIsPay(int isPay) {
+		this.isPay = isPay;
+	}
+	
 }

@@ -9,17 +9,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.order;
+import com.example.demo.entity.payOrder;
 import com.example.demo.service.orderService;
+import com.example.demo.service.payService;
 
 @RestController
 @RequestMapping(value = "order")
 public class orderController {
 	@Autowired
 	private orderService orderService;
-
+	@Autowired
+	private payService payService;
+	
 	@PostMapping("/addOrder")
-	public order addOrder(@RequestBody order order) {
-		System.out.println(order.getId());
+	public Object addOrder(@RequestBody order order) throws Exception { // 创建订单时，直接跳转支付界面，保证订单id和支付id一致
+		order.setId(payOrder.getOrderNo());
 		try {
 			orderService.addOrder(order);
 		} catch (Exception e) {
@@ -27,7 +31,7 @@ public class orderController {
 			// TODO: handle exception
 			return new order();
 		}
-		return order;
+		return payService.pay(order);
 	}
 
 	@PostMapping("/deleteOrder")

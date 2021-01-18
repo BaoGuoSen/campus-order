@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.dish;
 import com.example.demo.entity.paymentBo;
+import com.example.demo.service.orderService;
 import com.example.demo.service.payService;
 
 @RestController
@@ -23,27 +24,31 @@ public class payController {
 	@Autowired
 	private payService payService;
 	
+	@Autowired
+	private orderService orderService;
 	/**
      *  下单支付
      * */
-    @PostMapping(value = "/confirm" , produces = {"text/html;charset=UTF-8"})
-    public Object pay (@RequestBody dish dish) throws Exception {
-        //这个接口其实应该是post方式的，但是我这里图方便，直接以get方式访问，
-        //且返回格式是text/html，这样前端页面就能直接显示支付宝返回的html片段
-        //真实场景下由post方式请求，返回code、msg、data那种格式的标准结构，让前端拿到data里的
-        //html片段之后自行加载
-
-//        paymentBo bo = new paymentBo();
-        return payService.pay(dish);
-    }
+//    @PostMapping(value = "/confirm" , produces = {"text/html;charset=UTF-8"})
+//    public Object pay (@RequestBody dish dish) throws Exception {
+//        //这个接口其实应该是post方式的，但是我这里图方便，直接以get方式访问，
+//        //且返回格式是text/html，这样前端页面就能直接显示支付宝返回的html片段
+//        //真实场景下由post方式请求，返回code、msg、data那种格式的标准结构，让前端拿到data里的
+//        //html片段之后自行加载
+//
+////        paymentBo bo = new paymentBo();
+//        return payService.pay(dish);
+//    }
 
     /**
      *  支付成功的回调
      * */
     @PostMapping(value = "/fallback")
-    public Object fallback (HttpServletRequest request) {
-        Map map = request.getParameterMap();
-        System.out.println("进入了回调");
-        return null;
+    public void fallback (HttpServletRequest request) {
+        Map<String, String[]> map = request.getParameterMap();
+//        System.out.println(map.get("subject")[0]);
+//        System.out.println("进入了回调");
+    	
+    	orderService.updateOrderPayStatus(map.get("out_trade_no")[0]);
     }
 }

@@ -16,6 +16,8 @@ public interface orderMapper {
 	void deleteOrder(order order);
 
 	// 改
+	void updateOrderPayStatus(String id);
+	
 	// 查
 	List<order> getOrderByStoreId(String storeId);
 
@@ -28,4 +30,5 @@ public interface orderMapper {
 	List<order> getOrderByCustomerId(String customerId);
 
 	List<order> getOrderByDishId(String dishId);
+
 }

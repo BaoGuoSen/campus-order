@@ -10,6 +10,8 @@ public interface orderService {
 	void deleteOrder(order order);
 
 	// 改
+	void updateOrderPayStatus(String id);
+	
 	// 查
 	List<order> getOrderByStoreId(String storeId);
 

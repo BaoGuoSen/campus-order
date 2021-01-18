@@ -63,4 +63,10 @@ public class orderServiceImpl implements orderService {
 		return orderMapper.searchByCustomerName(customerName, storeId);
 	}
 
+	@Override
+	public void updateOrderPayStatus(String id) {
+		// TODO Auto-generated method stub
+		orderMapper.updateOrderPayStatus(id);
+	}
+
 }
