@@ -107,21 +107,20 @@ export default {
     handleExceed (files, fileList) {
       this.$message.warning(`当前限制选择 1 个文件，请将当前文件删除后在执行上传操作`)
     },
-    // 由后端在addorder后直接调用
-    // apply () {
-    //   this.$confirm('您将支付' + this.dish.price + '元，是否支付?', '提示', {
-    //     confirmButtonText: '支付',
-    //     cancelButtonText: '取消',
-    //     type: 'warning'
-    //   }).then(() => {
-    //     this.addOrder()
-    //   }).catch(() => {
-    //     this.$message({
-    //       type: 'info',
-    //       message: '已取消支付'
-    //     })
-    //   })
-    // },
+    apply () {
+      this.$confirm('您将支付' + this.dish.price + '元，是否支付?', '提示', {
+        confirmButtonText: '支付',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.addOrder()
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消支付'
+        })
+      })
+    },
     addOrder () {
       this.orderInit()
       this.$axios
@@ -142,19 +141,20 @@ export default {
           this.$message.error(e.status + ' ' + e.error)
         })
     },
-    alipay () {
-      this.$axios
-        .post('api/pay/confirm', this.dish)
-        .then(res => {
-          document.body.innerHTML = res.data
-          this.$nextTick(() => {
-            document.forms[0].submit()
-          })
-        })
-        .catch(e => {
-          this.$message.error(e.status + ' ' + e.error)
-        })
-    },
+    // 由后端在addorder后直接调用
+    // alipay () {
+    //   this.$axios
+    //     .post('api/pay/confirm', this.dish)
+    //     .then(res => {
+    //       document.body.innerHTML = res.data
+    //       this.$nextTick(() => {
+    //         document.forms[0].submit()
+    //       })
+    //     })
+    //     .catch(e => {
+    //       this.$message.error(e.status + ' ' + e.error)
+    //     })
+    // },
     update (dish) {
       this.$axios
         .post('api/store/updateDish', this.dish)

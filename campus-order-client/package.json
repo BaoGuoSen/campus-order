@@ -14,10 +14,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@types/clipboard": "^2.0.1",
     "axios": "^0.20.0",
     "element-ui": "^2.14.1",
     "shortid": "^2.2.15",
     "vue": "^2.5.2",
+    "vue-amap": "^0.5.10",
     "vue-router": "^3.4.9"
   },
   "devDependencies": {

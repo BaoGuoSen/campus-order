@@ -1,7 +1,6 @@
 <template>
   <div class="wrapper1">
     <div class="header" >
-      <!-- :style="{backgroundImage: 'url(' + store.src + ')', backgroundSize:'contain', }" -->
       <div style="float:left;">
         <h1>美食广场</h1>
       </div>
@@ -10,6 +9,7 @@
           <el-avatar  :size=35 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="drawer = true">个人信息</el-dropdown-item>
+            <el-dropdown-item @click.native="addressControl()">修改地址</el-dropdown-item>
             <el-dropdown-item  @click.native="logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -45,14 +45,26 @@
       </div>
     </el-drawer>
     <div class="content">
-      <router-view></router-view>
+      <router-view v-if="!mapShow"></router-view>
     </div>
+    <keep-alive>
+      <mymap
+        @addressControl = "addressControl"
+        class="map"
+        v-if="mapShow">
+        </mymap>
+    </keep-alive>
   </div>
 </template>
 <script>
+import mymap from '../components/myMap.vue'
 export default {
+  components: {
+    mymap
+  },
   data () {
     return {
+      mapShow: false,
       isEdit: false,
       drawer: false,
       store: '',
@@ -64,6 +76,17 @@ export default {
       }
     }
   },
+  // watch: {
+  //   'user.location' (newval, oldval) {
+  //     console.log(newval, 'watch location')
+  //     console.log(oldval, 'old')
+  //     if (newval && oldval) {
+  //       this.isEdit = true
+  //       this.drawer = true
+  //       this.$message.warning(`地址已同步到本地，如需同步到数据库，请点击提交，否则点击取消`)
+  //     }
+  //   }
+  // },
   computed: {
     role () {
       if (this.user.type === '1') {
@@ -79,6 +102,14 @@ export default {
     this.userinit()
   },
   methods: {
+    addressControl (location) {
+      this.mapShow = !this.mapShow
+      if (location) {
+        this.user.location = location
+        localStorage.setItem('userLocation', location)
+        this.$message.warning(`地址已同步到本地，如需同步到数据库，请点击个人信息提交当前地址信息`)
+      }
+    },
     drawerClose () {
       this.drawer = false
       this.isEdit = false
@@ -152,5 +183,12 @@ export default {
   overflow: hidden;
   padding: 0 4%;
   min-height: 600px;
+}
+.map {
+  position: absolute;
+  top: 90px;
+  left: 0px;
+  z-index: 100;
+  width: 98%;
 }
 </style>

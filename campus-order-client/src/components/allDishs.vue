@@ -16,10 +16,12 @@
 <script>
 import search from './search.vue'
 import dishCard from './dishCard.vue'
+import mymap from './myMap.vue'
 export default {
   components: {
     search,
-    dishCard
+    dishCard,
+    mymap
   },
   data () {
     return {
