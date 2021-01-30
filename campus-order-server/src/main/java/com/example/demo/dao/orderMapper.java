@@ -17,10 +17,14 @@ public interface orderMapper {
 
 	// 改
 	void updateOrderPayStatus(String id);
+	void updateOrderStatusConfirm(@Param("id") String id, @Param("endTime") String endTime);
+	void updateOrderRate(order order);
 	
 	// 查
 	List<order> getOrderByStoreId(String storeId);
-
+	
+	order getOrderById(String id);
+	
 	List<order> searchById(@Param("id") String id, @Param("storeId") String storeId);
 
 	List<order> searchByCustomerName(@Param("customerName") String customerName, @Param("storeId") String storeId);

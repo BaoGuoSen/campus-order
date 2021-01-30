@@ -1,15 +1,19 @@
 <template>
   <div class="wrapper1">
     <div class="header" >
-      <div style="float:left;">
-        <h1>美食广场</h1>
+      <div class="title">
+        <h1 style="display: inline-block">{{title}}</h1>
+        <el-tooltip content="美食广场" placement="right-end" effect="light">
+          <i class="el-icon-s-home" @click="toHome()"></i>
+        </el-tooltip>
       </div>
       <div class="right">
         <el-dropdown trigger="click">
-          <el-avatar  :size=35 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+          <el-avatar  :size=35 src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" style="cursor: pointer;"></el-avatar>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="drawer = true">个人信息</el-dropdown-item>
-            <el-dropdown-item @click.native="addressControl()">修改地址</el-dropdown-item>
+            <el-dropdown-item @click.native="toOrder()">我的订单</el-dropdown-item>
+            <el-dropdown-item @click.native="addressControl()">重新定位</el-dropdown-item>
             <el-dropdown-item  @click.native="logout()">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -52,7 +56,7 @@
         @addressControl = "addressControl"
         class="map"
         v-if="mapShow">
-        </mymap>
+      </mymap>
     </keep-alive>
   </div>
 </template>
@@ -96,12 +100,38 @@ export default {
       } else if (this.user.type === '3') {
         return '顾客'
       }
+    },
+    title () {
+      if (this.mapShow) {
+        return '高德地图'
+      } else if (this.$route.name === 'cusOrderList') {
+        return '我的订单'
+      } else if (this.$route.name === 'orderInfo') {
+        return '订单详情'
+      } else {
+        return '美食广场'
+      }
     }
   },
   mounted () {
     this.userinit()
   },
   methods: {
+    toHome () {
+      if (this.mapShow) {
+        this.mapShow = !this.mapShow
+      }
+      this.$router.push({
+        path: '/customer/allDishs',
+        query: {}
+      })
+    },
+    toOrder () {
+      this.$router.push({
+        path: '/customer/cusOrderList',
+        query: {}
+      })
+    },
     addressControl (location) {
       this.mapShow = !this.mapShow
       if (location) {
@@ -160,7 +190,7 @@ export default {
   min-height: 600px;
 }
 .header {
-  z-index: 2;
+  z-index: 3;
   outline: 0;
   padding: 0 4%;
   box-sizing: border-box;
@@ -171,6 +201,14 @@ export default {
   right: 0px;
   width: 100%;
   background-image: linear-gradient(45deg,#409EFF,#67C23A);
+}
+.title {
+  float: left;
+}
+.title /deep/ .el-icon-s-home {
+  position: relative;
+  top: -20px;
+  cursor: pointer;
 }
 .header .right {
   float: right;

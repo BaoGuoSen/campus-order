@@ -3,34 +3,38 @@
  <mapper namespace="com.example.demo.dao.orderMapper">
  
  	<select id="getAllOrder" resultType="com.example.demo.entity.order">
-        select * from dishOrder
+        select * from dishOrder order by id DESC
     </select>
     
     <select id="getOrderByStoreId" resultType="com.example.demo.entity.order">
-        select * from dishOrder where storeId=#{storeId}
+        select * from dishOrder where storeId=#{storeId} order by id DESC
+    </select>
+    
+    <select id="getOrderById" resultType="com.example.demo.entity.order">
+        select * from dishOrder where id=#{id}
     </select>
     
     <select id="getOrderByDishId" resultType="com.example.demo.entity.order">
-        select * from dishOrder where dishId=#{dishId}
+        select * from dishOrder where dishId=#{dishId} order by id DESC
     </select>
     
    	<select id="getOrderByCustomerId" resultType="com.example.demo.entity.order">
-        select * from dishOrder where customerId=#{customerId}
+        select * from dishOrder where customerId=#{customerId} order by id DESC
     </select>
     
     <select id="searchById" resultType="com.example.demo.entity.order">
-		select * from dishOrder where id LIKE CONCAT('%',#{id},'%') and storeId=#{storeId}
+		select * from dishOrder where id LIKE CONCAT('%',#{id},'%') and storeId=#{storeId} order by id DESC
 	</select>
 	
 	<select id="searchByCustomerName" resultType="com.example.demo.entity.order">
-		select * from dishOrder where customerName LIKE CONCAT('%',#{customerName},'%') and storeId=#{storeId}
+		select * from dishOrder where customerName LIKE CONCAT('%',#{customerName},'%') and storeId=#{storeId} order by id DESC
 	</select>
     
 	<insert id="addOrder" useGeneratedKeys="true" parameterType="com.example.demo.entity.order">
 		insert into dishOrder 
 		<trim prefix="(" suffix=")" suffixOverrides="," >
            id,dishId,storeId,startTime,dishName,storeName,note,amount,customerId,customerName,customerEvaluate,
-           rate,riderId,endTime,riderName
+           rate,riderId,endTime,riderName,storeSrc,storeLocation,dishSrc,status
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
         		#{id, jdbcType=VARCHAR},
@@ -47,14 +51,36 @@
     		   	#{rate, jdbcType=VARCHAR},
     		   	#{riderId, jdbcType=VARCHAR},
     		   	#{endTime, jdbcType=VARCHAR},
-    		   	#{riderName, jdbcType=VARCHAR}
+    		   	#{riderName, jdbcType=VARCHAR},
+    		   	#{storeSrc, jdbcType=VARCHAR},
+    		   	#{storeLocation, jdbcType=VARCHAR},
+    		   	#{dishSrc, jdbcType=VARCHAR},
+    		   	0
         </trim>
 	</insert>
 	
 	<update id="updateOrderPayStatus" parameterType="com.example.demo.entity.order">
 		update dishOrder
 		<set>
-			isPay = 1
+			status = 1
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateOrderStatusConfirm" parameterType="com.example.demo.entity.order">
+		update dishOrder
+		<set>
+			status = 2,
+			endTime = #{endTime, jdbcType=VARCHAR}
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<update id="updateOrderRate" parameterType="com.example.demo.entity.order">
+		update dishOrder
+		<set>
+			customerEvaluate = #{customerEvaluate, jdbcType=VARCHAR},
+			rate = #{rate, jdbcType=VARCHAR}
 		</set>
 		where id=#{id,jdbcType=VARCHAR}
 	</update>

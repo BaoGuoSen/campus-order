@@ -6,6 +6,10 @@
         select * from store where ownerId=#{ownerId}
     </select>
     
+    <select id="getStoreByStoreId" resultType="com.example.demo.entity.store">
+        select * from store where id=#{id}
+    </select>
+    
     <select id="getDishsByStoreId" resultType="com.example.demo.entity.dish">
         select * from dish where storeId=#{storeId} order by sellCount DESC
     </select>

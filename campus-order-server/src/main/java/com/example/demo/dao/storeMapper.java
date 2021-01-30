@@ -24,7 +24,8 @@ public interface storeMapper {
 
 	// 查
 	store getStoreById(String ownerId);
-
+	store getStoreByStoreId(String id);
+	
 	List<dish> getDishsByStoreId(String storeId);
 
 	List<dish> searchByValue(String value);

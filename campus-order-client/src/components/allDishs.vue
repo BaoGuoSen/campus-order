@@ -3,7 +3,7 @@
     <search
       @searchByValue="searchByValue"></search>
     <hr class="scale-half">
-    <div class="contentDish">
+    <div class="cus-contentDish">
       <dish-card
         :isEdit="false"
         v-for="(item, index) in dishs"
@@ -117,8 +117,11 @@ export default {
   transform: scaleY(0.5);
   transform-origin: 50% 100%;
 }
-.content .contentDish {
+.content .cus-contentDish {
   display: flex;
   flex-wrap: wrap;
+}
+.content .cus-contentDish /deep/ .card {
+  margin-right: 73px;
 }
 </style>

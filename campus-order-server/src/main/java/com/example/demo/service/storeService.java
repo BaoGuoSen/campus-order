@@ -9,7 +9,8 @@ public interface storeService {
 	void register(store store);
 
 	store getStoreById(String ownerId);
-
+	store getStoreByStoreId(String id);
+	
 	void addDish(dish dish);
 
 	List<dish> getDishsByStoreId(String storeId);

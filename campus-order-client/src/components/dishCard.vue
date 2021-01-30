@@ -85,6 +85,7 @@ export default {
       dialogVisible: false,
       order: {
         dishId: '',
+        dishSrc: '',
         storeId: '',
         customerId: ''
       }
@@ -108,11 +109,13 @@ export default {
       this.$message.warning(`当前限制选择 1 个文件，请将当前文件删除后在执行上传操作`)
     },
     apply () {
-      this.$confirm('您将支付' + this.dish.price + '元，是否支付?', '提示', {
+      this.$prompt('您将支付' + this.dish.price + '元，是否支付?', '提示', {
         confirmButtonText: '支付',
         cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
+        type: 'warning',
+        inputPlaceholder: '备注信息'
+      }).then(({ value }) => {
+        this.order.note = value
         this.addOrder()
       }).catch(() => {
         this.$message({
@@ -166,6 +169,7 @@ export default {
     },
     orderInit () {
       this.order.dishId = this.dish.id
+      this.order.dishSrc = this.dish.src
       this.order.storeId = this.dish.storeId
       this.order.customerId = localStorage.getItem('userId')
       this.order.startTime = new Date().getTime()
@@ -179,7 +183,7 @@ export default {
 <style scoped>
 .card {
   width: 270px;
-  margin: 20px 16px;
+  margin: 20px 32px 20px 0px;
 }
 .image {
   display: block;

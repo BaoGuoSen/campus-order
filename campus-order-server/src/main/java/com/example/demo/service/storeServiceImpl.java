@@ -28,7 +28,15 @@ public class storeServiceImpl implements storeService {
 		System.out.println(store);
 		return store;
 	}
-
+	
+	@Override
+	public store getStoreByStoreId(String id) {
+		// TODO Auto-generated method stub
+		store store = storeMapper.getStoreByStoreId(id);
+		System.out.println(store);
+		return store;
+	}
+	
 	@Override
 	public void addDish(dish dish) {
 		// TODO Auto-generated method stub

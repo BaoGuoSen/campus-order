@@ -61,6 +61,16 @@ export default new Router({
           path: 'allDishs',
           name: 'allDishs',
           component: allDishs
+        },
+        {
+          path: 'cusOrderList',
+          name: 'cusOrderList',
+          component: () => import('@/components/cusOrderList')
+        },
+        {
+          path: 'orderInfo/:id',
+          name: 'orderInfo',
+          component: () => import('@/components/orderInfo')
         }
       ]
     },

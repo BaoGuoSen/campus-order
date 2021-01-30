@@ -11,10 +11,14 @@ public interface orderService {
 
 	// 改
 	void updateOrderPayStatus(String id);
+	void updateOrderStatusConfirm(String id, String endTime);
+	void updateOrderRate(order order);
 	
 	// 查
 	List<order> getOrderByStoreId(String storeId);
-
+	
+	order getOrderById(String id);
+	
 	List<order> searchById(String id, String storeId);
 
 	List<order> searchByCustomerName(String customerName, String storeId);

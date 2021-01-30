@@ -16,15 +16,17 @@ public class order {
 	private String riderId;
 	private String endTime;
 	private String riderName;
-	private int isPay;
-
+	private String storeSrc;
+	private String storeLocation;
+	private String dishSrc;
+	private int status;
 	public order() {
 		super();
 	}
-
+	
 	public order(String id, String dishId, String storeId, String startTime, String dishName, String storeName,
 			String note, float amount, String customerId, String customerName, String customerEvaluate, String rate,
-			String riderId, String endTime, String riderName,int isPay) {
+			String riderId, String endTime, String riderName, String storeSrc, String storeLocation,String dishSrc,int status) {
 		super();
 		this.id = id;
 		this.dishId = dishId;
@@ -41,7 +43,10 @@ public class order {
 		this.riderId = riderId;
 		this.endTime = endTime;
 		this.riderName = riderName;
-		this.isPay = isPay;
+		this.storeSrc = storeSrc;
+		this.storeLocation = storeLocation;
+		this.dishSrc = dishSrc;
+		this.status = status;
 	}
 
 	/**
@@ -255,17 +260,59 @@ public class order {
 	}
 
 	/**
-	 * @return the isPay
+	 * @return the storeSrc
 	 */
-	public int getIsPay() {
-		return isPay;
+	public String getStoreSrc() {
+		return storeSrc;
 	}
 
 	/**
-	 * @param isPay the isPay to set
+	 * @param storeSrc the storeSrc to set
 	 */
-	public void setIsPay(int isPay) {
-		this.isPay = isPay;
+	public void setStoreSrc(String storeSrc) {
+		this.storeSrc = storeSrc;
+	}
+
+	/**
+	 * @return the storeLocation
+	 */
+	public String getStoreLocation() {
+		return storeLocation;
+	}
+
+	/**
+	 * @param storeLocation the storeLocation to set
+	 */
+	public void setStoreLocation(String storeLocation) {
+		this.storeLocation = storeLocation;
+	}
+
+	/**
+	 * @return the dishSrc
+	 */
+	public String getDishSrc() {
+		return dishSrc;
+	}
+
+	/**
+	 * @param dishSrc the dishSrc to set
+	 */
+	public void setDishSrc(String dishSrc) {
+		this.dishSrc = dishSrc;
+	}
+
+	/**
+	 * @return the status
+	 */
+	public int getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

@@ -17,7 +17,7 @@ public class orderServiceImpl implements orderService {
 	@Override
 	public void addOrder(order order) {
 		// TODO Auto-generated method stub
-		System.out.println(order.getId());
+		System.out.println(order.getNote() + "note");
 		orderMapper.addOrder(order);
 	}
 
@@ -68,5 +68,23 @@ public class orderServiceImpl implements orderService {
 		// TODO Auto-generated method stub
 		orderMapper.updateOrderPayStatus(id);
 	}
+	
+	@Override
+	public void updateOrderStatusConfirm(String id, String endTime) {
+		// TODO Auto-generated method stub
+		System.out.println(id);
+		orderMapper.updateOrderStatusConfirm(id, endTime);
+	}
 
+	@Override
+	public order getOrderById(String id) {
+		// TODO Auto-generated method stub
+		return orderMapper.getOrderById(id);
+	}
+
+	@Override
+	public void updateOrderRate(order order) {
+		// TODO Auto-generated method stub
+		orderMapper.updateOrderRate(order);
+	}
 }

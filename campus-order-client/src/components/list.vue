@@ -41,7 +41,7 @@
       width="120">
       <template slot-scope="scope">
         <el-button
-          @click.native.prevent="deleteRow(scope.$index, tableData)"
+          @click.native.prevent="deleteRow(scope.row.id)"
           type="text"
           size="small">
           移除
@@ -90,6 +90,9 @@ export default {
     },
     handleCurrentChange (val) {
       this.currentPage = val
+    },
+    deleteRow () {
+      console.log(arguments)
     }
   }
 }

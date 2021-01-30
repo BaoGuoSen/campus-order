@@ -184,4 +184,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
+.content .contentDish /deep/ .card {
+  margin-right: 32px;
+}
 </style>
