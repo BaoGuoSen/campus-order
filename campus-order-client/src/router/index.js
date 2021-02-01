@@ -103,6 +103,15 @@ export default new Router({
         requireAuth: true
       },
       component: storeInfo
+    },
+    {
+      path: '/rider',
+      name: 'rider',
+      meta: {
+        userTypes: ['2'],
+        requireAuth: true
+      },
+      component: () => import('@/view/rider')
     }
   ]
 })

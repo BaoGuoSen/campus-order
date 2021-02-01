@@ -83,7 +83,7 @@ export default {
       this.$axios
         .get('api/store/getStoreById', {
           params: {
-            ownerId: localStorage.getItem('userId')
+            ownerId: sessionStorage.getItem('userId')
           }
         })
         .then(res => {
@@ -96,8 +96,8 @@ export default {
             })
           }
           this.store = res.data
-          if (!localStorage.getItem('storeId')) {
-            localStorage.setItem('storeId', res.data.id)
+          if (!sessionStorage.getItem('storeId')) {
+            sessionStorage.setItem('storeId', res.data.id)
           }
         })
         .catch(e => {

@@ -136,7 +136,7 @@ export default {
       this.mapShow = !this.mapShow
       if (location) {
         this.user.location = location
-        localStorage.setItem('userLocation', location)
+        sessionStorage.setItem('userLocation', location)
         this.$message.warning(`地址已同步到本地，如需同步到数据库，请点击个人信息提交当前地址信息`)
       }
     },
@@ -145,10 +145,10 @@ export default {
       this.isEdit = false
     },
     userinit () {
-      this.user.id = localStorage.getItem('userId')
-      this.user.userName = localStorage.getItem('userName')
-      this.user.type = localStorage.getItem('userType')
-      this.user.location = localStorage.getItem('userLocation')
+      this.user.id = sessionStorage.getItem('userId')
+      this.user.userName = sessionStorage.getItem('userName')
+      this.user.type = sessionStorage.getItem('userType')
+      this.user.location = sessionStorage.getItem('userLocation')
     },
     drawerInit () {
       this.drawer = false
@@ -161,7 +161,7 @@ export default {
     },
     logout () {
       console.log('logout')
-      localStorage.clear()
+      sessionStorage.clear()
       this.$router.push({
         path: '/'
       })

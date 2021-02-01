@@ -81,7 +81,7 @@ export default {
     },
     logout () {
       console.log('logout')
-      localStorage.clear()
+      sessionStorage.clear()
       this.$router.push({
         path: '/'
       })
@@ -97,7 +97,7 @@ export default {
     },
     register () {
       this.store.id = shortid.generate()
-      this.store.ownerId = localStorage.getItem('userId')
+      this.store.ownerId = sessionStorage.getItem('userId')
       this.store.registerTime = (new Date()).toLocaleString()
       console.log(this.store.registerTime)
       this.$axios
@@ -136,7 +136,7 @@ export default {
       this.$axios
         .get('api/store/getStoreById', {
           params: {
-            ownerId: localStorage.getItem('userId')
+            ownerId: sessionStorage.getItem('userId')
           }
         })
         .then(res => {
@@ -151,7 +151,7 @@ export default {
   },
   mounted () {
     this.getStore()
-    this.store.ownerName = localStorage.getItem('userName')
+    this.store.ownerName = sessionStorage.getItem('userName')
   }
 }
 </script>

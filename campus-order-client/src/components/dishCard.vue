@@ -171,10 +171,10 @@ export default {
       this.order.dishId = this.dish.id
       this.order.dishSrc = this.dish.src
       this.order.storeId = this.dish.storeId
-      this.order.customerId = localStorage.getItem('userId')
+      this.order.customerId = sessionStorage.getItem('userId')
       this.order.startTime = new Date().getTime()
       this.order.dishName = this.dish.name
-      this.order.customerName = localStorage.getItem('userName')
+      this.order.customerName = sessionStorage.getItem('userName')
       this.order.amount = this.dish.price
     }
   }

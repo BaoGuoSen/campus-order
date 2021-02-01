@@ -35,7 +35,7 @@ axios.interceptors.response.use(response => {
 
 // 路由权限控制
 router.beforeEach((to, from, next) => {
-  const userType = localStorage.getItem('userType')
+  const userType = sessionStorage.getItem('userType')
   if (to.meta.requireAuth) {
     if (to.meta && to.meta.userTypes.includes(userType)) {
       next()

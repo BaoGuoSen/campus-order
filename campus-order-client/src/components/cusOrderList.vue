@@ -92,7 +92,7 @@ export default {
       this.$axios
         .get('api/order/getOrderByCustomerId', {
           params: {
-            customerId: localStorage.getItem('userId')
+            customerId: sessionStorage.getItem('userId')
           }
         })
         .then(res => {

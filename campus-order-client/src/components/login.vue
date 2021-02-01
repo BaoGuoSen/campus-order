@@ -41,10 +41,10 @@ export default {
               // document.cookie = 'userId = ' + res.data.id
               // document.cookie = 'userType = ' + res.data.userType
               // console.log(document.cookie)
-              localStorage.setItem('userId', res.data.id)
-              localStorage.setItem('userType', res.data.userType)
-              localStorage.setItem('userName', res.data.userName)
-              localStorage.setItem('userLocation', res.data.location)
+              sessionStorage.setItem('userId', res.data.id)
+              sessionStorage.setItem('userType', res.data.userType)
+              sessionStorage.setItem('userName', res.data.userName)
+              sessionStorage.setItem('userLocation', res.data.location)
               let userType = res.data.userType
               this.getStore(res.data.id, userType)
             } else {
@@ -73,14 +73,17 @@ export default {
             })
           }
           this.store = res.data
-          localStorage.setItem('storeId', res.data.id)
+          sessionStorage.setItem('storeId', res.data.id)
           if (userType === 1) {
             this.$router.push({
               path: '/store/ownDishs',
               query: {}
             })
           } else if (userType === 2) {
-
+            this.$router.push({
+              path: '/rider',
+              query: {}
+            })
           } else {
             this.$router.push({
               path: '/customer/allDishs',
@@ -94,23 +97,23 @@ export default {
     }
   },
   mounted () {
-    if (localStorage.getItem('userId')) {
-      let userType = localStorage.getItem('userType')
-      console.log(typeof userType)
-      if (userType === '1') {
-        this.$router.push({
-          path: '/store/ownDishs',
-          query: {}
-        })
-      } else if (userType === '2') {
+    // if (sessionStorage.getItem('userId')) {
+    //   let userType = sessionStorage.getItem('userType')
+    //   console.log(typeof userType)
+    //   if (userType === '1') {
+    //     this.$router.push({
+    //       path: '/store/ownDishs',
+    //       query: {}
+    //     })
+    //   } else if (userType === '2') {
 
-      } else {
-        this.$router.push({
-          path: '/customer/allDishs',
-          query: {}
-        })
-      }
-    }
+    //   } else {
+    //     this.$router.push({
+    //       path: '/customer/allDishs',
+    //       query: {}
+    //     })
+    //   }
+    // }
   }
 }
 </script>

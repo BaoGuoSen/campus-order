@@ -58,7 +58,7 @@ export default {
   methods: {
     addDish () {
       this.dish.id = shortid.generate()
-      this.dish.storeId = localStorage.getItem('storeId')
+      this.dish.storeId = sessionStorage.getItem('storeId')
       this.$emit('addDish', this.dish)
       this.hideDialog()
     },

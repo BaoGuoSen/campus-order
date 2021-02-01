@@ -18,7 +18,7 @@ export default {
     }
   },
   mounted () {
-    this.userId = localStorage.getItem('userId')
+    this.userId = sessionStorage.getItem('userId')
   }
 }
 </script>

@@ -40,7 +40,7 @@ export default {
         .get('api/order/searchById', {
           params: {
             id: this.searchId,
-            storeId: localStorage.getItem('storeId')
+            storeId: sessionStorage.getItem('storeId')
           }
         })
         .then(res => {
@@ -56,7 +56,7 @@ export default {
         .get('api/order/searchByCustomerName', {
           params: {
             customerName: this.searchCustomerName,
-            storeId: localStorage.getItem('storeId')
+            storeId: sessionStorage.getItem('storeId')
           }
         })
         .then(res => {
@@ -70,7 +70,7 @@ export default {
       this.$axios
         .get('api/order/getOrderByStoreId', {
           params: {
-            storeId: localStorage.getItem('storeId')
+            storeId: sessionStorage.getItem('storeId')
           }
         })
         .then(res => {

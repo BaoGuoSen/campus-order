@@ -102,10 +102,10 @@ export default {
     }
   },
   mounted () {
-    this.user.id = localStorage.getItem('userId')
-    this.user.userName = localStorage.getItem('userName')
-    this.user.type = localStorage.getItem('userType')
-    this.user.location = localStorage.getItem('userLocation')
+    this.user.id = sessionStorage.getItem('userId')
+    this.user.userName = sessionStorage.getItem('userName')
+    this.user.type = sessionStorage.getItem('userType')
+    this.user.location = sessionStorage.getItem('userLocation')
     this.getStore()
   },
   methods: {
@@ -124,7 +124,7 @@ export default {
     },
     logout () {
       console.log('logout')
-      localStorage.clear()
+      sessionStorage.clear()
       this.$router.push({
         path: '/'
       })
@@ -148,7 +148,7 @@ export default {
       this.$axios
         .get('api/store/getStoreById', {
           params: {
-            ownerId: localStorage.getItem('userId')
+            ownerId: sessionStorage.getItem('userId')
           }
         })
         .then(res => {
@@ -161,8 +161,8 @@ export default {
             })
           }
           this.store = res.data
-          if (!localStorage.getItem('storeId')) {
-            localStorage.setItem('storeId', res.data.id)
+          if (!sessionStorage.getItem('storeId')) {
+            sessionStorage.setItem('storeId', res.data.id)
           }
         })
         .catch(e => {
