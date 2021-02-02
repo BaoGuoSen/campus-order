@@ -71,7 +71,10 @@
 		<set>
 			src=#{src, jdbcType=VARCHAR},
 			name=#{name, jdbcType=VARCHAR},
-			info=#{info, jdbcType=VARCHAR}
+			info=#{info, jdbcType=VARCHAR},
+			location=#{location, jdbcType=VARCHAR},
+			lng=#{lng,jdbcType=DECIMAL},
+			lat=#{lat,jdbcType=DECIMAL}
 		</set>
 		where id=#{id,jdbcType=VARCHAR}
 	</update>

@@ -153,7 +153,7 @@ export default {
     submitAddress () {
       console.log('经纬度', this.center)
       console.log('地址', this.address)
-      this.$emit('addressControl', this.address)
+      this.$emit('addressControl', this.address, this.lng, this.lat)
     },
     initSearch () {
       console.log('Mapinit////////////////////')

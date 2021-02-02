@@ -6,7 +6,10 @@ public class user {
 	public String password;
 	public int userType;
 	public String location;
-
+	public double lng;
+	public double lat;
+	public int turn;
+	
 	public user() {
 		super();
 	}
@@ -98,4 +101,46 @@ public class user {
 		this.location = location;
 	}
 
+	/**
+	 * @return the lng
+	 */
+	public double getLng() {
+		return lng;
+	}
+
+	/**
+	 * @param lng the lng to set
+	 */
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+
+	/**
+	 * @return the lat
+	 */
+	public double getLat() {
+		return lat;
+	}
+
+	/**
+	 * @param lat the lat to set
+	 */
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	/**
+	 * @return the turn
+	 */
+	public int getTurn() {
+		return turn;
+	}
+
+	/**
+	 * @param turn the turn to set
+	 */
+	public void setTurn(int turn) {
+		this.turn = turn;
+	}
+	
 }

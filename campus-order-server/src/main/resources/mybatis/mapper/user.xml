@@ -23,7 +23,10 @@
 		update user
 		<set>
 			userName=#{userName, jdbcType=VARCHAR},
-			location=#{location,jdbcType=VARCHAR}
+			location=#{location,jdbcType=VARCHAR},
+			lng=#{lng,jdbcType=DECIMAL},
+			lat=#{lat,jdbcType=DECIMAL},
+			turn=#{turn,jdbcType=INTEGER}
 		</set>
 		where id=#{id,jdbcType=VARCHAR}
 	</update>

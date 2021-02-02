@@ -13,6 +13,7 @@
           </el-form-item>
           <el-form-item label="地理信息：">
             <el-input v-model="store.location" placeholder="接入地图接口，获取位置信息，待办" autocomplete="off"></el-input>
+            <div class="location-icon"><i class="el-icon-location-information" @click="mapShow = true"></i></div>
           </el-form-item>
           <el-form-item label="注册时间：">
             <el-input v-model="store.registerTime"  placeholder="store.owner" disabled>{{store.registerTime}}</el-input>
@@ -50,11 +51,22 @@
         </el-form>
       </div>
     </div>
+    <keep-alive>
+      <mymap
+        @addressControl = "addressControl"
+        class="map"
+        v-if="mapShow">
+      </mymap>
+    </keep-alive>
   </div>
 </template>
 <script>
+import mymap from '../components/myMap.vue'
 const shortid = require('shortid')
 export default {
+  components: {
+    mymap
+  },
   data () {
     return {
       store: {
@@ -66,8 +78,11 @@ export default {
         ownerName: '',
         income: '',
         registerTime: '',
-        info: ''
-      }
+        info: '',
+        lng: '',
+        lat: ''
+      },
+      mapShow: false
     }
   },
   computed: {
@@ -76,6 +91,14 @@ export default {
     }
   },
   methods: {
+    addressControl (location, lng, lat) {
+      this.mapShow = false
+      if (location) {
+        this.store.location = location
+        this.store.lng = lng
+        this.store.lat = lat
+      }
+    },
     goback () {
       this.$router.go(-1)
     },
@@ -176,6 +199,19 @@ export default {
   top: 8px;
   left: 8px;
 }
-</style>
-<style>
+.location-icon {
+  font-size: 25px;
+  position: absolute;
+  right: -40px;
+  bottom: -10px;
+  cursor: pointer;
+}
+.map {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  width: 98%;
+  height: 100%;
+}
 </style>

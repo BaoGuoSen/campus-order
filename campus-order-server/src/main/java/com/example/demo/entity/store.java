@@ -10,7 +10,9 @@ public class store {
 	private float income;
 	private String registerTime;
 	private String info;
-
+	private double lng;
+	private double lat;
+	
 	public store() {
 		super();
 	}
@@ -155,4 +157,32 @@ public class store {
 		this.info = info;
 	}
 
+	/**
+	 * @return the lng
+	 */
+	public double getLng() {
+		return lng;
+	}
+
+	/**
+	 * @param lng the lng to set
+	 */
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+
+	/**
+	 * @return the lat
+	 */
+	public double getLat() {
+		return lat;
+	}
+
+	/**
+	 * @param lat the lat to set
+	 */
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+	
 }

@@ -62,6 +62,7 @@
 </template>
 <script>
 import mymap from '../components/myMap.vue'
+import {updateUser} from '../api/user'
 export default {
   components: {
     mymap
@@ -76,7 +77,9 @@ export default {
         id: '',
         userName: '',
         type: '',
-        location: ''
+        location: '',
+        lng: '',
+        lat: ''
       }
     }
   },
@@ -132,12 +135,14 @@ export default {
         query: {}
       })
     },
-    addressControl (location) {
+    addressControl (location, lng, lat) {
       this.mapShow = !this.mapShow
       if (location) {
         this.user.location = location
+        this.user.lng = lng
+        this.user.lat = lat
         sessionStorage.setItem('userLocation', location)
-        this.$message.warning(`地址已同步到本地，如需同步到数据库，请点击个人信息提交当前地址信息`)
+        this.updateUser()
       }
     },
     drawerClose () {
@@ -167,8 +172,7 @@ export default {
       })
     },
     updateUser () {
-      this.$axios
-        .post('api/user/update', this.user)
+      updateUser(this.user)
         .then(res => {
           this.$message({
             message: '修改成功',
