@@ -112,6 +112,11 @@ export default new Router({
         requireAuth: true
       },
       component: () => import('@/view/rider')
+    },
+    {
+      path: '/apply',
+      name: 'apply',
+      component: () => import('@/view/alipay')
     }
   ]
 })

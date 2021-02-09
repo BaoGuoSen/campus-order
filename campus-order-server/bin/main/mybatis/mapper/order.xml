@@ -10,6 +10,10 @@
         select * from dishOrder where storeId=#{storeId} order by id DESC
     </select>
     
+    <select id="getCusById" resultType="String">
+        select customerId from dishOrder where id=#{id}
+    </select>
+    
     <select id="getOrderById" resultType="com.example.demo.entity.order">
         select * from dishOrder where id=#{id}
     </select>

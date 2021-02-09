@@ -80,20 +80,10 @@ export default {
         location: '',
         lng: '',
         lat: ''
-      }
+      },
+      wsUrl: 'ws://127.0.0.1:8080/ws/'
     }
   },
-  // watch: {
-  //   'user.location' (newval, oldval) {
-  //     console.log(newval, 'watch location')
-  //     console.log(oldval, 'old')
-  //     if (newval && oldval) {
-  //       this.isEdit = true
-  //       this.drawer = true
-  //       this.$message.warning(`地址已同步到本地，如需同步到数据库，请点击提交，否则点击取消`)
-  //     }
-  //   }
-  // },
   computed: {
     role () {
       if (this.user.type === '1') {
@@ -116,8 +106,13 @@ export default {
       }
     }
   },
-  mounted () {
+  created () {
     this.userinit()
+    this.wsUrl = this.wsUrl + this.user.id
+    this.socket.initWebSocket(this.wsUrl)
+    this.websocketSend(this.user.userName)
+  },
+  mounted () {
   },
   methods: {
     toHome () {
@@ -154,6 +149,8 @@ export default {
       this.user.userName = sessionStorage.getItem('userName')
       this.user.type = sessionStorage.getItem('userType')
       this.user.location = sessionStorage.getItem('userLocation')
+      this.user.lng = sessionStorage.getItem('lng')
+      this.user.lat = sessionStorage.getItem('lat')
     },
     drawerInit () {
       this.drawer = false
@@ -184,7 +181,18 @@ export default {
         .catch(e => {
           this.$message.error(e.status + ' ' + e.error)
         })
+    },
+    onmessage (data) {
+      if (data) {
+        console.log(data, '支付成功的订单id')
+      }
+    },
+    websocketSend (data) {
+      this.socket.sendSock(data, this.onmessage)
     }
+  },
+  destroyed () {
+    this.socket.webSocketClose()
   }
 }
 </script>

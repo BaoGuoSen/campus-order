@@ -87,4 +87,10 @@ public class orderServiceImpl implements orderService {
 		// TODO Auto-generated method stub
 		orderMapper.updateOrderRate(order);
 	}
+
+	@Override
+	public String getCusById(String id) {
+		// TODO Auto-generated method stub
+		return orderMapper.getCusById(id);
+	}
 }

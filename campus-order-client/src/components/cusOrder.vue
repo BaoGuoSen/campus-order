@@ -65,6 +65,13 @@ export default {
       rateSubmit: true // 评价提交后，不再允许重复提交
     }
   },
+  // created () {
+  //   this.websocket.onmessage = function (e) {
+  //     if (e.data === 'paid') {
+  //       console.log(this.order, 'cusorder')
+  //     }
+  //   }
+  // },
   computed: {
     payButton () {
       return this.order.status === 0
@@ -118,10 +125,16 @@ export default {
       this.$axios
         .post('api/pay/confirm', this.order)
         .then(res => {
-          document.body.innerHTML = res.data
-          this.$nextTick(() => {
-            document.forms[0].submit()
-          })
+          if (res.status === 200) {
+            let routerData = this.$router.resolve({
+              path: '/apply',
+              query: {
+                html: res.data
+              }
+            })
+            window.open(routerData.href, '_blank')
+          }
+          console.log(res)
         })
         .catch(e => {
           this.$message.error(e.status + ' ' + e.error)

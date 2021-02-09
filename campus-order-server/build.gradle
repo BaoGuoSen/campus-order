@@ -32,6 +32,9 @@ dependencies {
 	 
 	// 阿里支付宝依赖
 	 compile('com.alipay.sdk:alipay-easysdk:2.0.2')
+	 
+	// websocket
+	 compile('org.springframework.boot:spring-boot-starter-websocket')
 }
 
 test {

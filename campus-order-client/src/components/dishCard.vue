@@ -133,10 +133,15 @@ export default {
             message: '下单成功',
             type: 'success'
           })
-          document.body.innerHTML = res.data
-          this.$nextTick(() => {
-            document.forms[0].submit()
-          })
+          if (res.status === 200) {
+            let routerData = this.$router.resolve({
+              path: '/apply',
+              query: {
+                html: res.data
+              }
+            })
+            window.open(routerData.href, '_blank')
+          }
           this.dish.sellCount = this.dish.sellCount + 1
           this.update()
         })

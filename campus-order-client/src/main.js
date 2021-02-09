@@ -7,6 +7,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import AMap from 'vue-amap'
 import 'element-ui/lib/theme-chalk/index.css'
+import socket from './util/websocket'
 
 Vue.use(AMap)
 
@@ -16,7 +17,7 @@ AMap.initAMapApiLoader({
   v: '1.4.4', // 版本
   uiVersion: '1.0' // ui版本
 })
-
+Vue.prototype.socket = socket
 Vue.prototype.$axios = axios
 Vue.use(router)
 Vue.use(ElementUI)

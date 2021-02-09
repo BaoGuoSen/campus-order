@@ -19,6 +19,8 @@ public interface orderService {
 	
 	order getOrderById(String id);
 	
+	String getCusById(String id);
+	
 	List<order> searchById(String id, String storeId);
 
 	List<order> searchByCustomerName(String customerName, String storeId);

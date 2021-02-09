@@ -45,6 +45,8 @@ export default {
               sessionStorage.setItem('userType', res.data.userType)
               sessionStorage.setItem('userName', res.data.userName)
               sessionStorage.setItem('userLocation', res.data.location)
+              sessionStorage.setItem('lng', res.data.lng)
+              sessionStorage.setItem('lat', res.data.lat)
               let userType = res.data.userType
               this.getStore(res.data.id, userType)
             } else {

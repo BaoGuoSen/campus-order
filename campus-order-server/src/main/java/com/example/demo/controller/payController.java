@@ -1,20 +1,18 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
+
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.demo.entity.dish;
 import com.example.demo.entity.order;
-import com.example.demo.entity.paymentBo;
 import com.example.demo.service.orderService;
 import com.example.demo.service.payService;
 
@@ -27,6 +25,9 @@ public class payController {
 	
 	@Autowired
 	private orderService orderService;
+
+	@Resource
+	private MyWebSocket MyWebSocket;
 	/**
      *  下单支付
      * */
@@ -43,12 +44,17 @@ public class payController {
 
     /**
      *  支付成功的回调
+     * @throws IOException 
      * */
     @PostMapping(value = "/fallback")
-    public void fallback (HttpServletRequest request) {
+    public void fallback (HttpServletRequest request) throws IOException {
         Map<String, String[]> map = request.getParameterMap();
 //        System.out.println(map.get("subject")[0]);
         System.out.println("进入了回调");
+        
+        // 告诉客户端支付成功，推送支付成功的订单号，方便客户端进行骑手配送表的操作
+        String cusId = orderService.getCusById(map.get("out_trade_no")[0]);
+    	MyWebSocket.sendInfo(map.get("out_trade_no")[0], cusId);
     	
     	orderService.updateOrderPayStatus(map.get("out_trade_no")[0]);
     }

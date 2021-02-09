@@ -107,6 +107,13 @@ export default {
     this.user.location = sessionStorage.getItem('userLocation')
   },
   methods: {
+    logout () {
+      console.log('logout')
+      sessionStorage.clear()
+      this.$router.push({
+        path: '/'
+      })
+    },
     drawerClose () {
       this.drawer = false
       this.isEdit = false
