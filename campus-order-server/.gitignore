@@ -10,10 +10,6 @@ out/
 !**/src/test/**/out/
 
 ### NetBeans ###
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
 
 ### VS Code ###
 .vscode/
