@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.example.demo.dao.userMapper">
+ 
+ 	<select id="findUser" resultType="com.example.demo.entity.user">
+        select * from user where userName=#{userName}
+    </select>
+    
+	<insert id="register" useGeneratedKeys="true" parameterType="com.example.demo.entity.user">
+		insert into user 
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+           id,userName,password,userType
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+        		#{id, jdbcType=VARCHAR},
+               #{userName, jdbcType=VARCHAR},
+               #{password, jdbcType=VARCHAR},
+    		   #{userType, jdbcType=INTEGER},
+        </trim>
+	</insert>
+	
+	<update id="update" parameterType="com.example.demo.entity.user">
+		update user
+		<set>
+			userName=#{userName, jdbcType=VARCHAR},
+			location=#{location,jdbcType=VARCHAR},
+			lng=#{lng,jdbcType=DECIMAL},
+			lat=#{lat,jdbcType=DECIMAL},
+			turn=#{turn,jdbcType=INTEGER}
+		</set>
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
+ </mapper>
