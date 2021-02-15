@@ -10,7 +10,6 @@ out/
 !**/src/test/**/out/
 
 ### NetBeans ###
-/nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
