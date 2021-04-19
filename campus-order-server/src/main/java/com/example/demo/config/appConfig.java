@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class appConfig {
 
 	private String uploadFolder = "E://uploadFiles/";
-	private String previewPath = "http://127.0.0.1:8080/image/";
+	private String previewPath = "http://127.0.0.1:8080/";
 
 	public String getUploadFolder() {
 		return uploadFolder;

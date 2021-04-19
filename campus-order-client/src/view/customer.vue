@@ -120,7 +120,7 @@ export default {
         this.mapShow = !this.mapShow
       }
       this.$router.push({
-        path: '/customer/allDishs',
+        path: '/customer/allStores',
         query: {}
       })
     },
@@ -185,6 +185,7 @@ export default {
     onmessage (data) {
       if (data) {
         console.log(data, '支付成功的订单id')
+        // 支付成功后，骑手配送分配策略TODO
       }
     },
     websocketSend (data) {

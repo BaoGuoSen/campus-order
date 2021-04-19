@@ -58,7 +58,12 @@ export default new Router({
       component: customer,
       children: [
         {
-          path: 'allDishs',
+          path: 'allStores',
+          name: 'allStores',
+          component: () => import('@/components/allStores')
+        },
+        {
+          path: 'allDishs/:storeId',
           name: 'allDishs',
           component: allDishs
         },

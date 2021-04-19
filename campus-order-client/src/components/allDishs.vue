@@ -39,6 +39,7 @@ export default {
   },
   mounted () {
     this.getAllDishs()
+    console.log(this.$route.params.storeId)
   },
   methods: {
     addDish (dish) {
@@ -57,7 +58,11 @@ export default {
     },
     getAllDishs () {
       this.$axios
-        .get('api/store/getAllDishs')
+        .get('api/store/getDishsByStoreId', {
+          params: {
+            storeId: this.$route.params.storeId
+          }
+        })
         .then(res => {
           this.dishs = res.data
         })
@@ -69,7 +74,8 @@ export default {
       this.$axios
         .get('api/store/searchByValue', {
           params: {
-            value: value
+            value: value,
+            storeId: this.$route.params.storeId
           }
         })
         .then(res => {

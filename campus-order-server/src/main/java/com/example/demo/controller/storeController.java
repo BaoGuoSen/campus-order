@@ -84,13 +84,23 @@ public class storeController {
 		return storeService.getDishsByStoreId(storeId);
 	}
 
+	@GetMapping("/searchByStoreName")
+	public List<store> searchByStoreName(String storeName) {
+		return storeService.searchByStoreName(storeName);
+	}
+	
 	@GetMapping("/searchByValue")
-	public List<dish> searchByValue(String value) {
-		return storeService.searchByValue(value);
+	public List<dish> searchByValue(String value, String storeId) {
+		return storeService.searchByValue(value,storeId);
 	}
 
 	@GetMapping("/getAllDishs")
 	public List<dish> getAllDishs() {
 		return storeService.getAllDishs();
+	}
+	
+	@GetMapping("/getAllStores")
+	public List<store> getAllStores() {
+		return storeService.getAllStores();
 	}
 }

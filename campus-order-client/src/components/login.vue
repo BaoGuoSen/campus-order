@@ -88,7 +88,7 @@ export default {
             })
           } else {
             this.$router.push({
-              path: '/customer/allDishs',
+              path: '/customer/allStores',
               query: {}
             })
           }

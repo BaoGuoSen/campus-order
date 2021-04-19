@@ -3,6 +3,7 @@ package com.example.demo.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.entity.dish;
 import com.example.demo.entity.store;
@@ -28,7 +29,11 @@ public interface storeMapper {
 	
 	List<dish> getDishsByStoreId(String storeId);
 
-	List<dish> searchByValue(String value);
+	List<store> searchByStoreName(String storeName);
+	
+	List<dish> searchByValue(@Param("value") String value, @Param("storeId") String storeId);
 
 	List<dish> getAllDishs();
+	
+	List<store> getAllStores(); 
 }

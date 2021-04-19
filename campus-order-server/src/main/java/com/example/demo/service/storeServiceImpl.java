@@ -54,11 +54,17 @@ public class storeServiceImpl implements storeService {
 		// TODO Auto-generated method stub
 		storeMapper.deleteDish(dish);
 	}
-
+	
 	@Override
-	public List<dish> searchByValue(String value) {
+	public List<store> searchByStoreName(String storeName) {
 		// TODO Auto-generated method stub
-		return storeMapper.searchByValue(value);
+		return storeMapper.searchByStoreName(storeName);
+	}
+	
+	@Override
+	public List<dish> searchByValue(String value,String storeId) {
+		// TODO Auto-generated method stub
+		return storeMapper.searchByValue(value,storeId);
 	}
 
 	@Override
@@ -77,6 +83,12 @@ public class storeServiceImpl implements storeService {
 	public List<dish> getAllDishs() {
 		// TODO Auto-generated method stub
 		return storeMapper.getAllDishs();
+	}
+	
+	@Override
+	public List<store> getAllStores() {
+		// TODO Auto-generated method stub
+		return storeMapper.getAllStores();
 	}
 
 }

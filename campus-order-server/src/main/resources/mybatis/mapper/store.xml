@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.example.demo.dao.storeMapper">
- 
+ 	
+ 	<select id="getAllStores" resultType="com.example.demo.entity.store">
+        select * from store
+    </select>
+    
  	<select id="getStoreById" resultType="com.example.demo.entity.store">
         select * from store where ownerId=#{ownerId}
     </select>
@@ -18,8 +22,12 @@
         select * from dish order by sellCount DESC
     </select>
     
+    <select id="searchByStoreName" resultType="com.example.demo.entity.store">
+		select * from store where name LIKE CONCAT('%',#{storeName},'%')
+	</select>
+	
     <select id="searchByValue" resultType="com.example.demo.entity.dish">
-		select * from dish where name LIKE CONCAT('%',#{value},'%') order by sellCount DESC
+		select * from dish where name LIKE CONCAT('%',#{value},'%') and storeId =#{storeId} order by sellCount DESC
 	</select>
 	
 	<insert id="register" useGeneratedKeys="true" parameterType="com.example.demo.entity.store">

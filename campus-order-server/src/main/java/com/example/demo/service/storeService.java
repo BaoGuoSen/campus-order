@@ -14,8 +14,10 @@ public interface storeService {
 	void addDish(dish dish);
 
 	List<dish> getDishsByStoreId(String storeId);
-
-	List<dish> searchByValue(String value);
+	
+	List<store> searchByStoreName(String storeName);
+	
+	List<dish> searchByValue(String value,String storeId);
 
 	void deleteDish(dish dish);
 
@@ -24,4 +26,6 @@ public interface storeService {
 	void updateStore(store store);
 
 	List<dish> getAllDishs();
+	
+	List<store> getAllStores(); 
 }
