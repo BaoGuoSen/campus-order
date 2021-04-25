@@ -8,7 +8,8 @@ import ElementUI from 'element-ui'
 import AMap from 'vue-amap'
 import 'element-ui/lib/theme-chalk/index.css'
 import socket from './util/websocket'
-
+import {getDistance} from './util/amap-getDistance'
+AMap.getDistance = getDistance
 Vue.use(AMap)
 
 AMap.initAMapApiLoader({

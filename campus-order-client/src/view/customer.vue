@@ -137,6 +137,8 @@ export default {
         this.user.lng = lng
         this.user.lat = lat
         sessionStorage.setItem('userLocation', location)
+        sessionStorage.setItem('lng', lng)
+        sessionStorage.setItem('lat', lat)
         this.updateUser()
       }
     },

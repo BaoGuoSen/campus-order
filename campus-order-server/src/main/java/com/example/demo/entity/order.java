@@ -20,13 +20,20 @@ public class order {
 	private String storeLocation;
 	private String dishSrc;
 	private int status;
+	private double storeLng;
+	private double storeLat;
+	private double cusLng;
+	private double cusLat;
+	private String cusLocation;
+	
 	public order() {
 		super();
 	}
 	
 	public order(String id, String dishId, String storeId, String startTime, String dishName, String storeName,
 			String note, float amount, String customerId, String customerName, String customerEvaluate, String rate,
-			String riderId, String endTime, String riderName, String storeSrc, String storeLocation,String dishSrc,int status) {
+			String riderId, String endTime, String riderName, String storeSrc, String storeLocation,String dishSrc,int status,
+			double storeLng,double storeLat,double cusLng,double cusLat,String cusLocation) {
 		super();
 		this.id = id;
 		this.dishId = dishId;
@@ -47,6 +54,11 @@ public class order {
 		this.storeLocation = storeLocation;
 		this.dishSrc = dishSrc;
 		this.status = status;
+		this.storeLng = storeLng;
+		this.storeLat = storeLat;
+		this.cusLng = cusLng;
+		this.cusLat = cusLat;
+		this.cusLocation = cusLocation;
 	}
 
 	/**
@@ -314,5 +326,76 @@ public class order {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
+	/**
+	 * @return the storeLng
+	 */
+	public double getStoreLng() {
+		return storeLng;
+	}
+
+	/**
+	 * @param storeLng the storeLng to set
+	 */
+	public void setStoreLng(double storeLng) {
+		this.storeLng = storeLng;
+	}
+
+	/**
+	 * @return the storeLat
+	 */
+	public double getStoreLat() {
+		return storeLat;
+	}
+
+	/**
+	 * @param storeLat the storeLat to set
+	 */
+	public void setStoreLat(double storeLat) {
+		this.storeLat = storeLat;
+	}
+
+	/**
+	 * @return the cusLng
+	 */
+	public double getCusLng() {
+		return cusLng;
+	}
+
+	/**
+	 * @param cusLng the cusLng to set
+	 */
+	public void setCusLng(double cusLng) {
+		this.cusLng = cusLng;
+	}
+
+	/**
+	 * @return the cusLat
+	 */
+	public double getCusLat() {
+		return cusLat;
+	}
+
+	/**
+	 * @param cusLat the cusLat to set
+	 */
+	public void setCusLat(double cusLat) {
+		this.cusLat = cusLat;
+	}
+
+	/**
+	 * @return the cusLocation
+	 */
+	public String getCusLocation() {
+		return cusLocation;
+	}
+
+	/**
+	 * @param cusLocation the cusLocation to set
+	 */
+	public void setCusLocation(String cusLocation) {
+		this.cusLocation = cusLocation;
+	}
+	
 	
 }

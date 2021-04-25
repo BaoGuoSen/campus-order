@@ -39,7 +39,7 @@ export default {
   },
   mounted () {
     this.getAllDishs()
-    console.log(this.$route.params.storeId)
+    console.log(this.$route.params.store)
   },
   methods: {
     addDish (dish) {

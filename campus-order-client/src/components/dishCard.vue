@@ -83,13 +83,12 @@ export default {
     return {
       fit: 'cover',
       dialogVisible: false,
-      order: {
-        dishId: '',
-        dishSrc: '',
-        storeId: '',
-        customerId: ''
-      }
+      order: {},
+      store: {}
     }
+  },
+  mounted () {
+    this.store = this.$route.params.store
   },
   methods: {
     deleteDish () {
@@ -181,6 +180,14 @@ export default {
       this.order.dishName = this.dish.name
       this.order.customerName = sessionStorage.getItem('userName')
       this.order.amount = this.dish.price
+      this.order.storeLocation = this.store.location
+      this.order.storeName = this.store.name
+      this.order.storeSrc = this.store.src
+      this.order.storeLng = this.store.lng
+      this.order.storeLat = this.store.lat
+      this.order.cusLng = sessionStorage.getItem('lng')
+      this.order.cusLat = sessionStorage.getItem('lat')
+      this.order.cusLocation = sessionStorage.getItem('userLocation')
     }
   }
 }

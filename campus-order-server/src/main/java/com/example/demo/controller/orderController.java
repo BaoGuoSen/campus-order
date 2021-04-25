@@ -28,13 +28,9 @@ public class orderController {
 	
 	@PostMapping("/addOrder")
 	public Object addOrder(@RequestBody order order) throws Exception { // 创建订单时，直接跳转支付界面，保证订单id和支付id一致
-		System.out.println(order.getNote());
+//		System.out.println(order.getNote());
 		order.setId(payOrder.getOrderNo());
 		try {
-			store store = storeService.getStoreByStoreId(order.getStoreId());
-			order.setStoreLocation(store.getLocation());
-			order.setStoreName(store.getName());
-			order.setStoreSrc(store.getSrc());
 			orderService.addOrder(order);
 		} catch (Exception e) {
 			System.out.println(e.toString());

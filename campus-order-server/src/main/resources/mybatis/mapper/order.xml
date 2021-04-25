@@ -38,7 +38,8 @@
 		insert into dishOrder 
 		<trim prefix="(" suffix=")" suffixOverrides="," >
            id,dishId,storeId,startTime,dishName,storeName,note,amount,customerId,customerName,customerEvaluate,
-           rate,riderId,endTime,riderName,storeSrc,storeLocation,dishSrc,status
+           rate,riderId,endTime,riderName,storeSrc,storeLocation,dishSrc,status,storeLng,storeLat,
+           cusLng,cusLat,cusLocation
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
         		#{id, jdbcType=VARCHAR},
@@ -59,7 +60,12 @@
     		   	#{storeSrc, jdbcType=VARCHAR},
     		   	#{storeLocation, jdbcType=VARCHAR},
     		   	#{dishSrc, jdbcType=VARCHAR},
-    		   	0
+    		   	0,
+    		   	#{storeLng,jdbcType=DECIMAL},
+    		   	#{storeLat,jdbcType=DECIMAL},
+    		   	#{cusLng,jdbcType=DECIMAL},
+    		   	#{cusLat,jdbcType=DECIMAL},
+    		   	#{cusLocation,jdbcType=VARCHAR}
         </trim>
 	</insert>
 	
