@@ -4,3 +4,7 @@ import axios from 'axios'
 export const updateUser = (user) => {
   return axios.post('api/user/update', user)
 }
+
+export const getAllRiders = () => {
+  return axios.get('api/user/getAllRiders')
+}

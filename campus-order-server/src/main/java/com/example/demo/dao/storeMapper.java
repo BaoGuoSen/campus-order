@@ -24,7 +24,7 @@ public interface storeMapper {
 	void updateStore(store store);
 
 	// 查
-	store getStoreById(String ownerId);
+	store getStoreByOwnerId(String ownerId);
 	store getStoreByStoreId(String id);
 	
 	List<dish> getDishsByStoreId(String storeId);

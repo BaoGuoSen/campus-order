@@ -6,7 +6,7 @@
         select * from store
     </select>
     
- 	<select id="getStoreById" resultType="com.example.demo.entity.store">
+ 	<select id="getStoreByOwnerId" resultType="com.example.demo.entity.store">
         select * from store where ownerId=#{ownerId}
     </select>
     

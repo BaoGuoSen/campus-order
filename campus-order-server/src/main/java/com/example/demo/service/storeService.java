@@ -8,7 +8,7 @@ import com.example.demo.entity.store;
 public interface storeService {
 	void register(store store);
 
-	store getStoreById(String ownerId);
+	store getStoreByOwnerId(String ownerId);
 	store getStoreByStoreId(String id);
 	
 	void addDish(dish dish);

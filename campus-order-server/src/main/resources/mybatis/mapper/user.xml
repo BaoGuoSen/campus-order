@@ -6,6 +6,10 @@
         select * from user where userName=#{userName}
     </select>
     
+    <select id="getAllRiders" resultType="com.example.demo.entity.user">
+        select * from user where userType = 2 and turn = 1
+    </select>
+    
 	<insert id="register" useGeneratedKeys="true" parameterType="com.example.demo.entity.user">
 		insert into user 
 		<trim prefix="(" suffix=")" suffixOverrides="," >

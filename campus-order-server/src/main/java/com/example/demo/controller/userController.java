@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,6 +62,11 @@ public class userController {
 			return null;
 		}
 		return user;
+	}
+	
+	@GetMapping("/getAllRiders")
+	public List<user> getAllRiders() {
+		return userService.getAllRiders();
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,12 @@ public class userServiceImpl implements userService {
 	public void update(user user) {
 		// TODO Auto-generated method stub
 		userMapper.update(user);
+	}
+
+	@Override
+	public List<user> getAllRiders() {
+		// TODO Auto-generated method stub
+		return userMapper.getAllRiders();
 	}
 
 }

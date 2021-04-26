@@ -62,7 +62,10 @@
 </template>
 <script>
 import mymap from '../components/myMap.vue'
-import {updateUser} from '../api/user'
+import {updateUser, getAllRiders} from '../api/user'
+import {getOrderById} from '../api/order'
+import {getMinDistanceRider} from '../util/amap-getDistance'
+import {getStoreByStoreId} from '../api/store'
 export default {
   components: {
     mymap
@@ -72,7 +75,7 @@ export default {
       mapShow: false,
       isEdit: false,
       drawer: false,
-      store: '',
+      store: {},
       user: {
         id: '',
         userName: '',
@@ -81,7 +84,10 @@ export default {
         lng: '',
         lat: ''
       },
-      wsUrl: 'ws://127.0.0.1:8080/ws/'
+      wsUrl: 'ws://127.0.0.1:8080/ws/',
+      usefulRiders: [],
+      usefulOrder: {},
+      fitRider: {}
     }
   },
   computed: {
@@ -101,6 +107,9 @@ export default {
         return '我的订单'
       } else if (this.$route.name === 'orderInfo') {
         return '订单详情'
+      } else if (this.$route.name === 'allDishs') {
+        this.initStore()
+        return this.store.name
       } else {
         return '美食广场'
       }
@@ -113,8 +122,20 @@ export default {
     this.websocketSend(this.user.userName)
   },
   mounted () {
+    getStoreByStoreId(this.$route.params.storeId)
+      .then(res => {
+        console.log(res.data, '1')
+        this.store = res.data
+      })
   },
   methods: {
+    initStore () {
+      getStoreByStoreId(this.$route.params.storeId)
+        .then(res => {
+          console.log(res.data, '1')
+          this.store = res.data
+        })
+    },
     toHome () {
       if (this.mapShow) {
         this.mapShow = !this.mapShow
@@ -188,6 +209,19 @@ export default {
       if (data) {
         console.log(data, '支付成功的订单id')
         // 支付成功后，骑手配送分配策略TODO
+        // 查找有效的订单，获取商家地点
+        getOrderById('20210425004415434')
+          .then(res => {
+            this.usefulOrder = res.data
+          })
+        // 所有有效的骑手
+        getAllRiders()
+          .then(res => {
+            this.usefulRiders = res.data
+            console.log(this.usefulRiders)
+            // 获取离商家距离最近的骑手
+            this.fitRider = getMinDistanceRider(this.usefulOrder, this.usefulRiders)
+          })
       }
     },
     websocketSend (data) {

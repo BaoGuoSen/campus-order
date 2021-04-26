@@ -65,6 +65,7 @@ public class MyWebSocket {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         System.out.println("来自客户端的消息:" + message);
+        sendMessage("hello");
     }
 
 

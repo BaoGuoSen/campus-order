@@ -23,6 +23,9 @@ export default {
   },
   methods: {
     jumpToRegister (userType) {
+      // 1 商家
+      // 2 骑手
+      // 3 用户
       this.$router.push({
         path: 'register',
         query: {userType: userType}

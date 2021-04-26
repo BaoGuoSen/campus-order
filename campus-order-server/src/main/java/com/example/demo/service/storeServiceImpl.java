@@ -22,9 +22,9 @@ public class storeServiceImpl implements storeService {
 	}
 
 	@Override
-	public store getStoreById(String ownerId) {
+	public store getStoreByOwnerId(String ownerId) {
 		// TODO Auto-generated method stub
-		store store = storeMapper.getStoreById(ownerId);
+		store store = storeMapper.getStoreByOwnerId(ownerId);
 		System.out.println(store);
 		return store;
 	}
