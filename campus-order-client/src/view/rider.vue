@@ -77,6 +77,7 @@ export default {
   },
   data () {
     return {
+      wsUrl: 'ws://127.0.0.1:8080/ws/',
       mapShow: false,
       activeIndex2: '1',
       isEdit: false,
@@ -88,6 +89,12 @@ export default {
         location: ''
       }
     }
+  },
+  created () {
+    this.userinit()
+    this.wsUrl = this.wsUrl + this.user.id
+    this.socket.initWebSocket(this.wsUrl)
+    this.websocketSend(this.user.userName)
   },
   computed: {
     role () {
@@ -101,12 +108,22 @@ export default {
     }
   },
   mounted () {
-    this.user.id = sessionStorage.getItem('userId')
-    this.user.userName = sessionStorage.getItem('userName')
-    this.user.type = sessionStorage.getItem('userType')
-    this.user.location = sessionStorage.getItem('userLocation')
   },
   methods: {
+    websocketSend (data) {
+      this.socket.sendSock(data, this.onmessage)
+    },
+    onmessage (data) {
+      console.log(data, 'rider onmessage')
+    },
+    userinit () {
+      this.user.id = sessionStorage.getItem('userId')
+      this.user.userName = sessionStorage.getItem('userName')
+      this.user.type = sessionStorage.getItem('userType')
+      this.user.location = sessionStorage.getItem('userLocation')
+      this.user.lng = sessionStorage.getItem('lng')
+      this.user.lat = sessionStorage.getItem('lat')
+    },
     logout () {
       console.log('logout')
       sessionStorage.clear()

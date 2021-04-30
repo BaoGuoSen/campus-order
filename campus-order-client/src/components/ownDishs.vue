@@ -144,7 +144,7 @@ export default {
     },
     getStore () {
       this.$axios
-        .get('api/store/getStoreById', {
+        .get('api/store/getStoreByOwnerId', {
           params: {
             ownerId: sessionStorage.getItem('userId')
           }

@@ -90,7 +90,9 @@
 		update dishOrder
 		<set>
 			customerEvaluate = #{customerEvaluate, jdbcType=VARCHAR},
-			rate = #{rate, jdbcType=VARCHAR}
+			rate = #{rate, jdbcType=VARCHAR},
+			riderId = #{riderId, jdbcType=VARCHAR},
+			riderName = #{riderName, jdbcType=VARCHAR}
 		</set>
 		where id=#{id,jdbcType=VARCHAR}
 	</update>

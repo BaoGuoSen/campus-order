@@ -60,7 +60,7 @@ export default {
     },
     getStore (ownerId, userType) {
       this.$axios
-        .get('api/store/getStoreById', {
+        .get('api/store/getStoreByOwnerId', {
           params: {
             ownerId: ownerId
           }

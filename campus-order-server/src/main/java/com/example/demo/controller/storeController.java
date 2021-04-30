@@ -75,8 +75,8 @@ public class storeController {
 	}
 
 	@GetMapping("/getStoreByOwnerId")
-	public store getStoreById(String ownerId) {
-		return storeService.getStoreById(ownerId);
+	public store getStoreByOwnerId(String ownerId) {
+		return storeService.getStoreByOwnerId(ownerId);
 	}
 
 	@GetMapping("/getDishsByStoreId")

@@ -55,7 +55,8 @@
       <mymap
         @addressControl = "addressControl"
         class="map"
-        v-if="mapShow">
+        v-if="mapShow"
+        @closeMap="closeMap">
       </mymap>
     </keep-alive>
   </div>
@@ -63,7 +64,7 @@
 <script>
 import mymap from '../components/myMap.vue'
 import {updateUser, getAllRiders} from '../api/user'
-import {getOrderById} from '../api/order'
+import {getOrderById, updateOrder} from '../api/order'
 import {getMinDistanceRider} from '../util/amap-getDistance'
 import {getStoreByStoreId} from '../api/store'
 export default {
@@ -129,6 +130,9 @@ export default {
       })
   },
   methods: {
+    closeMap () {
+      this.mapShow = false
+    },
     initStore () {
       getStoreByStoreId(this.$route.params.storeId)
         .then(res => {
@@ -221,8 +225,19 @@ export default {
             console.log(this.usefulRiders)
             // 获取离商家距离最近的骑手
             this.fitRider = getMinDistanceRider(this.usefulOrder, this.usefulRiders)
+            // 更新订单信息,分配骑手配送
+            this.deliveryRider()
           })
       }
+    },
+    deliveryRider () {
+      this.usefulOrder.riderId = this.fitRider.id
+      this.usefulOrder.riderName = this.fitRider.userName
+      updateOrder(this.usefulOrder)
+        .then(res => {
+          console.log(res, '更新后的订单')
+        })
+      // this.websocketSend(`配送员是 ${this.usefulOrder.riderName}`)
     },
     websocketSend (data) {
       this.socket.sendSock(data, this.onmessage)
@@ -277,5 +292,6 @@ export default {
   left: 0px;
   z-index: 100;
   width: 98%;
+  height: 600px;
 }
 </style>

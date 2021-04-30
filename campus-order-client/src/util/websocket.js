@@ -4,7 +4,6 @@ var globalCallback = null
 function initWebSocket (url) {
   if ('WebSocket' in window) {
     webSocket = new WebSocket(url) // 创建socket对象
-    console.log(webSocket)
   } else {
     alert('该浏览器不支持websocket!')
   }

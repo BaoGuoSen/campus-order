@@ -1,15 +1,24 @@
 <template>
   <div>
-    <el-tabs v-model="activeName" @tab-click="handleClick" class="cus-taps">
+    <keep-alive>
+      <processmap
+        :order="order"
+        @closeMap="closeMap"
+        class="map"
+        v-if="isMapShow">
+      </processmap>
+    </keep-alive>
+    <el-tabs v-if="!isMapShow" v-model="activeName" @tab-click="handleClick" class="cus-taps">
       <el-tab-pane label="待付款" name="noPay"></el-tab-pane>
       <el-tab-pane label="未完成" name="noDone"></el-tab-pane>
       <el-tab-pane label="已完成" name="Done"></el-tab-pane>
       <el-tab-pane label="全部订单" name="All"></el-tab-pane>
     </el-tabs>
-    <div ref="list" class="orderList-contain" @scroll="scrollDebounce()">
+    <div ref="list" class="orderList-contain" @scroll="scrollDebounce()" v-if="!isMapShow">
       <div class="infinite-list-phantom" :style="{ height: orderListHeight + 'px' }"></div>
       <div class="infinite-list" :style="{ transform: getTransform }">
         <cus-order
+          @mapControl="mapControl"
           class="orderList"
           v-for="order in visibleData"
           :key="order.id"
@@ -20,16 +29,20 @@
 </template>
 <script>
 import cusOrder from './cusOrder'
+import processmap from '../components/processMap.vue'
 export default {
   components: {
-    cusOrder
+    cusOrder,
+    processmap
   },
   data () {
     return {
+      order: '',
+      isMapShow: false,
       activeName: 'All',
       orders: [],
       curOrders: [],
-      itemHeight: 100,
+      itemHeight: 140,
       screenHeight: 0,
       startOffset: 0,
       start: 0,
@@ -61,6 +74,14 @@ export default {
     this.end = this.start + this.visibleCount
   },
   methods: {
+    closeMap () {
+      this.isMapShow = false
+    },
+    mapControl (order) {
+      this.isMapShow = !this.isMapShow
+      this.order = order
+      console.log(order, 'map')
+    },
     debounce (fn, wait) {
       let timeout = null
       return function () {
@@ -107,6 +128,14 @@ export default {
 }
 </script>
 <style scoped>
+.map {
+  position: absolute;
+  top: 90px;
+  left: 0px;
+  z-index: 100;
+  width: 98%;
+  height: 80%;
+}
 .cus-taps {
   margin-top: 100px;
 }

@@ -7,6 +7,7 @@
         id="search">
       <button @click="searchByHand">搜索</button>
       <button @click="submitAddress" style="margin-left: 2px">确认</button>
+      <button @click="closeMap" style="margin-left: 2px">关闭</button>
       <div class="tip-box" id="searchTip"></div>
     </div>
     <el-amap class="amap-box"
@@ -37,7 +38,7 @@ export default {
         citylimit: true
       },
       center: [121.329402, 31.228667],
-      zoom: 50,
+      zoom: 15,
       lng: 0,
       lat: 0,
       loaded: false,
@@ -78,7 +79,7 @@ export default {
         }
       },
       // 一些工具插件
-      plugin: [
+      plugin: [ // 加载插件，在执行初始化函数
         {
           // 定位
           pName: 'Geolocation',
@@ -150,6 +151,9 @@ export default {
     }
   },
   methods: {
+    closeMap () {
+      this.$emit('closeMap')
+    },
     submitAddress () {
       console.log('经纬度', this.center)
       console.log('地址', this.address)
@@ -171,7 +175,7 @@ export default {
         })
         vm.poiPicker = poiPicker
         // 监听poi选中信息
-        poiPicker.on('poiPicked', function (poiResult) {
+        poiPicker.on('poiPicked', function (poiResult) { // 搜索框tips点击处理
           // console.log(poiResult)
           let source = poiResult.source
           let poi = poiResult.item
@@ -232,7 +236,7 @@ export default {
 
 .search-box button {
     float: left;
-    width: 20%;
+    width: 10%;
     height: 100%;
     background: #30ccc1;
     border: 1px solid #30ccc1;

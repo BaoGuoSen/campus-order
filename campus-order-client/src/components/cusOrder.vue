@@ -14,7 +14,9 @@
       <div class="order-button-list">
         <el-button type="primary" plain v-if="payButton" @click="alipay()">立即付款</el-button>
         <el-button type="primary" plain v-if="confirmButton" @click="confirm()">确认送达</el-button>
-        <el-button type="primary" plain v-if="evaluationButton" @click="evaluationDialog = true">评价</el-button>
+        <el-button type="primary" plain v-if="confirmButton" @click="showProcess()">配送进度</el-button>
+        <el-button type="primary" plain v-if="evaluationButton && !this.order.rate" @click="evaluationDialog = true">评价</el-button>
+        <el-button type="primary" plain v-else-if="evaluationButton" disabled>已评价</el-button>
         <el-button type="primary" plain @click="toOrderInfo()">详情</el-button>
       </div>
       <div class="order-status-contain">
@@ -27,7 +29,7 @@
         width="40%">
         <span style="float: left;">评分:</span>
         <el-rate
-          v-model="order.rate"
+          v-model="rate"
           show-score
           text-color="#ff9900"
           score-template="{value}">
@@ -36,7 +38,7 @@
           type="textarea"
           :rows="3"
           placeholder="请输入内容"
-          v-model="order.customerEvaluate">
+          v-model="evaluate">
         </el-input>
         <span slot="footer" class="dialog-footer">
           <el-button @click="evaluationDialog = false">取消</el-button>
@@ -59,6 +61,8 @@ export default {
   name: '',
   data () {
     return {
+      rate: '',
+      evaluate: '',
       fit: 'cover',
       statusLabels: ['待付款', '未完成', '已完成'],
       evaluationDialog: false,
@@ -99,7 +103,12 @@ export default {
     }
   },
   methods: {
+    showProcess () {
+      this.$emit('mapControl', this.order)
+    },
     updateOrderRate () {
+      this.order.rate = this.rate
+      this.order.customerEvaluate = this.evaluate
       this.$axios
         .post('api/order/updateOrderRate', this.order)
         .then(res => {
