@@ -63,7 +63,7 @@ export default new Router({
           component: () => import('@/components/allStores')
         },
         {
-          path: 'allDishs/:storeId',
+          path: 'allDishs',
           name: 'allDishs',
           component: allDishs
         },
@@ -97,6 +97,11 @@ export default new Router({
           path: 'orderList',
           name: 'orderList',
           component: orderList
+        },
+        {
+          path: 'orderInfo/:id',
+          name: 'storeOrderInfo',
+          component: () => import('@/components/orderInfo')
         }
       ]
     },

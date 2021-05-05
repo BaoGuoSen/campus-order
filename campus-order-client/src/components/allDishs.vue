@@ -60,7 +60,7 @@ export default {
       this.$axios
         .get('api/store/getDishsByStoreId', {
           params: {
-            storeId: this.$route.params.storeId
+            storeId: this.$route.query.storeId
           }
         })
         .then(res => {

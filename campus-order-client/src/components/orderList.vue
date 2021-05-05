@@ -7,7 +7,7 @@
     <el-button class="reset" type="info" @click="reset">重置</el-button>
     <hr class="scale-half">
     <list
-    :orders="orders"></list>
+    :orders="formatOrder"></list>
   </div>
 </template>
 <script>
@@ -24,6 +24,19 @@ export default {
     }
   },
   computed: {
+    formatOrder () {
+      this.orders.forEach(item => {
+        let date = new Date(Number(item.startTime))
+        item.startTime = date.toLocaleString()
+        if (item.endTime) {
+          let date = new Date(Number(item.endTime))
+          item.endTime = date.toLocaleString()
+        } else {
+          item.endTime = '暂未送达'
+        }
+      })
+      return this.orders
+    }
   },
   mounted () {
     this.getOrderByStoreId()

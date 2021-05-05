@@ -54,10 +54,10 @@ export default {
   methods: {
     toAllDishs () {
       this.$router.push({
-        name: 'allDishs',
-        params: {
+        path: '/customer/allDishs',
+        query: {
           storeId: this.store.id,
-          store: this.store
+          storeName: this.store.name
         }
       })
     }

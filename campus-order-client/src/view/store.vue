@@ -25,11 +25,11 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-        <el-menu-item index="ownDishs">
+        <el-menu-item index="/store/ownDishs">
           <i class="el-icon-s-home"></i>
           <span slot="title">{{store.name}}</span>
         </el-menu-item>
-        <el-submenu index="2">
+        <!-- <el-submenu index="2">
           <template slot="title">
             <i class="el-icon-tickets"></i>
             <span>订单管理</span>
@@ -38,7 +38,11 @@
             <el-menu-item index="orderList">所有订单</el-menu-item>
             <el-menu-item index="2-2">选项2</el-menu-item>
           </el-menu-item-group>
-        </el-submenu>
+        </el-submenu> -->
+        <el-menu-item index="/store/orderList">
+          <i class="el-icon-tickets"></i>
+            <span>订单管理</span>
+        </el-menu-item>
       </el-menu>
     </div>
     <el-drawer

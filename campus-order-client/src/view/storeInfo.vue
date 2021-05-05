@@ -18,9 +18,6 @@
           <el-form-item label="注册时间：">
             <el-input v-model="store.registerTime"  placeholder="store.owner" disabled>{{store.registerTime}}</el-input>
           </el-form-item>
-          <el-form-item label="总收入：">
-            <el-input v-model="store.income"  placeholder="store.owner" disabled>{{store.income}}</el-input>
-          </el-form-item>
           <el-form-item label="上传店铺主页图片：">
             <el-image
               v-if="store.src"
@@ -53,6 +50,7 @@
     </div>
     <keep-alive>
       <mymap
+        @closeMap="closeMap"
         @addressControl = "addressControl"
         class="map"
         v-if="mapShow">
@@ -91,6 +89,9 @@ export default {
     }
   },
   methods: {
+    closeMap () {
+      this.mapShow = false
+    },
     addressControl (location, lng, lat) {
       this.mapShow = false
       if (location) {

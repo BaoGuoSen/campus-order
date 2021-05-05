@@ -1,13 +1,11 @@
 <template>
   <div>
-    <keep-alive>
-      <processmap
-        :order="order"
-        @closeMap="closeMap"
-        class="map"
-        v-if="isMapShow">
-      </processmap>
-    </keep-alive>
+    <processmap
+      :order="order"
+      @closeMap="closeMap"
+      class="map"
+      v-if="isMapShow">
+    </processmap>
     <el-tabs v-if="!isMapShow" v-model="activeName" @tab-click="handleClick" class="cus-taps">
       <el-tab-pane label="待付款" name="noPay"></el-tab-pane>
       <el-tab-pane label="未完成" name="noDone"></el-tab-pane>

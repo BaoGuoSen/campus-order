@@ -109,8 +109,7 @@ export default {
       } else if (this.$route.name === 'orderInfo') {
         return '订单详情'
       } else if (this.$route.name === 'allDishs') {
-        this.initStore()
-        return this.store.name
+        return this.$route.query.storeName
       } else {
         return '美食广场'
       }

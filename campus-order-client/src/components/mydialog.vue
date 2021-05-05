@@ -12,7 +12,7 @@
         <el-form-item label="价格:" label-width="140px">
           <el-input v-model="dish.price" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="上传店铺主页图片:" label-width="140px">
+        <el-form-item label="上传菜品图片:" label-width="140px">
           <el-upload
             action="api/file/upload"
             list-type="picture-card"
