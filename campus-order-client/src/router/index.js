@@ -27,6 +27,11 @@ export default new Router({
       component: refuse
     },
     {
+      path: '/paied',
+      name: 'paied',
+      component: () => import('@/view/paied')
+    },
+    {
       path: '/index',
       name: 'index',
       component: index,
@@ -121,7 +126,14 @@ export default new Router({
         userTypes: ['2'],
         requireAuth: true
       },
-      component: () => import('@/view/rider')
+      component: () => import('@/view/rider'),
+      children: [
+        {
+          path: 'riderNavigation',
+          name: 'riderNavigation',
+          component: () => import('@/components/riderNavigation')
+        }
+      ]
     },
     {
       path: '/apply',

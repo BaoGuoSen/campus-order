@@ -93,4 +93,10 @@ public class orderServiceImpl implements orderService {
 		// TODO Auto-generated method stub
 		return orderMapper.getCusById(id);
 	}
+
+	@Override
+	public List<order> getOrderByRiderId(String riderId) {
+		// TODO Auto-generated method stub
+		return orderMapper.getOrderByRiderId(riderId);
+	}
 }

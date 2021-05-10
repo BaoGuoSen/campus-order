@@ -48,7 +48,7 @@ public class MyWebSocket {
      */
     @OnClose
     public void onClose() throws IOException {
-    	System.out.println(userId);
+    	System.out.println("关闭连接的用户Id：" + userId);
     	if (webSocketMap.containsKey(userId)) {
     		webSocketMap.remove(userId);
     		subOnlineCount(); //在线人数减1
@@ -65,7 +65,7 @@ public class MyWebSocket {
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         System.out.println("来自客户端的消息:" + message);
-        sendMessage("hello");
+        sendInfo("顾客下单成功", message);
     }
 
 
@@ -96,7 +96,7 @@ public class MyWebSocket {
       * 用于群发自定义消息
       * */
     public static void sendInfo(String message, @PathParam("userId") String userId) throws IOException {
-    	System.out.println(userId);
+    	System.out.println(userId + "userId");
     	if (userId == null) {
     		for (MyWebSocket item : webSocketMap.values()) {
     			try {
@@ -106,7 +106,7 @@ public class MyWebSocket {
     			}
     		}
     	} else if (webSocketMap.get(userId) != null) {
-    		System.out.println(message);
+    		System.out.println("发送的消息" + message);
     		webSocketMap.get(userId).sendMessage(message);
     	}
         

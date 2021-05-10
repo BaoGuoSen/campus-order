@@ -39,7 +39,6 @@ export default {
   },
   mounted () {
     this.getAllDishs()
-    console.log(this.$route.params.store)
   },
   methods: {
     addDish (dish) {
@@ -75,7 +74,7 @@ export default {
         .get('api/store/searchByValue', {
           params: {
             value: value,
-            storeId: this.$route.params.storeId
+            storeId: this.$route.query.storeId
           }
         })
         .then(res => {

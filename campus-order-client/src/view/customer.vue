@@ -63,7 +63,7 @@
 </template>
 <script>
 import mymap from '../components/myMap.vue'
-import {updateUser, getAllRiders} from '../api/user'
+import {updateUser, getAllRiders, getOwnerIdByOrderId} from '../api/user'
 import {getOrderById, updateOrder} from '../api/order'
 import {getMinDistanceRider} from '../util/amap-getDistance'
 import {getStoreByStoreId} from '../api/store'
@@ -119,7 +119,7 @@ export default {
     this.userinit()
     this.wsUrl = this.wsUrl + this.user.id
     this.socket.initWebSocket(this.wsUrl)
-    this.websocketSend(this.user.userName)
+    this.websocketSend() // 自定义接收函数初始化
   },
   mounted () {
     getStoreByStoreId(this.$route.params.storeId)
@@ -213,9 +213,13 @@ export default {
         console.log(data, '支付成功的订单id')
         // 支付成功后，骑手配送分配策略TODO
         // 查找有效的订单，获取商家地点
-        getOrderById('20210425004415434')
+        getOrderById(data)
           .then(res => {
             this.usefulOrder = res.data
+            getOwnerIdByOrderId(res.data.storeId) // 根据订单的店铺id找到拥有者的id
+              .then(res => {
+                this.websocketSend(res.data) // 给该商家发消息
+              })
           })
         // 所有有效的骑手
         getAllRiders()
@@ -234,6 +238,7 @@ export default {
       this.usefulOrder.riderName = this.fitRider.userName
       updateOrder(this.usefulOrder)
         .then(res => {
+          this.websocketSend(this.fitRider.id) // 订单更新后，给骑手发送消息
           console.log(res, '更新后的订单')
         })
       // this.websocketSend(`配送员是 ${this.usefulOrder.riderName}`)

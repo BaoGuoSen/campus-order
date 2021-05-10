@@ -15,4 +15,6 @@ public interface userMapper {
 	void update(user user);
 	
 	List<user> getAllRiders();
+	
+	String getOwnerIdByOrderId(String orderId);
 }

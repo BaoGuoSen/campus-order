@@ -57,6 +57,7 @@
   </el-card>
 </template>
 <script>
+import {getStoreByStoreId} from '../api/store'
 export default {
   name: '',
   props: {
@@ -88,7 +89,7 @@ export default {
     }
   },
   mounted () {
-    this.store = this.$route.params.store
+    this.store = this.getStoreByStoreId()
   },
   methods: {
     deleteDish () {
@@ -125,6 +126,7 @@ export default {
     },
     addOrder () {
       this.orderInit()
+      console.log('???')
       this.$axios
         .post('api/order/addOrder', this.order)
         .then(res => {
@@ -172,6 +174,7 @@ export default {
         })
     },
     orderInit () {
+      console.log('111')
       this.order.dishId = this.dish.id
       this.order.dishSrc = this.dish.src
       this.order.storeId = this.dish.storeId
@@ -188,6 +191,12 @@ export default {
       this.order.cusLng = sessionStorage.getItem('lng')
       this.order.cusLat = sessionStorage.getItem('lat')
       this.order.cusLocation = sessionStorage.getItem('userLocation')
+    },
+    getStoreByStoreId () {
+      getStoreByStoreId(this.dish.storeId)
+        .then(res => {
+          this.store = res.data
+        })
     }
   }
 }

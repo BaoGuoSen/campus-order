@@ -12,4 +12,6 @@ public interface userService {
 	void update(user user);
 	
 	List<user> getAllRiders();
+	
+	String getOwnerIdByOrderId(String orderId);
 }

@@ -1,5 +1,5 @@
 <template>
-  <el-card shadow="hover" class="card" @click.native="toAllDishs">
+  <el-card shadow="hover" class="card" @click.native="toAllDishs" v-if="isShow">
     <el-image
       :src='store.src'
       :fit="fit"
@@ -45,6 +45,9 @@ export default {
     formDistance () {
       let distance = this.distance / 1000
       return `${distance.toFixed(2)} km`
+    },
+    isShow () {
+      return this.distance / 1000 < 50
     }
   },
   mounted () {

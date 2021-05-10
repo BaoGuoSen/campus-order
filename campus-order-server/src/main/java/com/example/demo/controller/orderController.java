@@ -76,6 +76,11 @@ public class orderController {
 		return orderService.getOrderById(id);
 	}
 	
+	@GetMapping("/getOrderByRiderId")
+	public List<order> getOrderByRiderId(String riderId) {
+		return orderService.getOrderByRiderId(riderId);
+	}
+	
 	@GetMapping("/searchById")
 	public List<order> searchById(String id, String storeId) {
 		return orderService.searchById(id, storeId);

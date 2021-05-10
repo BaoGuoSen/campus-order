@@ -23,6 +23,8 @@ public interface orderMapper {
 	// 查
 	List<order> getOrderByStoreId(String storeId);
 	
+	List<order> getOrderByRiderId(String riderId);
+	
 	String getCusById(String id);
 	
 	order getOrderById(String id);

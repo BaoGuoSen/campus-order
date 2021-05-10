@@ -18,6 +18,10 @@
         select * from dishOrder where id=#{id}
     </select>
     
+    <select id="getOrderByRiderId" resultType="com.example.demo.entity.order">
+        select * from dishOrder where riderId=#{riderId} and status = 1 order by startTime DESC
+    </select>
+    
     <select id="getOrderByDishId" resultType="com.example.demo.entity.order">
         select * from dishOrder where dishId=#{dishId} order by id DESC
     </select>

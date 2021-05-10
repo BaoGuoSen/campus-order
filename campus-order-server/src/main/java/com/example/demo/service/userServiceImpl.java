@@ -39,4 +39,10 @@ public class userServiceImpl implements userService {
 		return userMapper.getAllRiders();
 	}
 
+	@Override
+	public String getOwnerIdByOrderId(String orderId) {
+		// TODO Auto-generated method stub
+		return userMapper.getOwnerIdByOrderId(orderId);
+	}
+
 }

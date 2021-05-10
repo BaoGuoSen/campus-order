@@ -68,5 +68,9 @@ public class userController {
 	public List<user> getAllRiders() {
 		return userService.getAllRiders();
 	}
-
+	
+	@GetMapping("/getOwnerIdByOrderId")
+	public String getOwnerIdByOrderId(String orderId) {
+		return userService.getOwnerIdByOrderId(orderId);
+	}
 }

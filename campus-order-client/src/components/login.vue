@@ -83,7 +83,7 @@ export default {
             })
           } else if (userType === 2) {
             this.$router.push({
-              path: '/rider',
+              path: '/rider/riderNavigation',
               query: {}
             })
           } else {

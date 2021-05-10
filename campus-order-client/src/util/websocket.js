@@ -51,6 +51,7 @@ function webSocketClose () {
 function sendSock (agentData, callback) {
   globalCallback = callback // 此callback为在其他地方调用时定义的接收socket数据的函数，此关重要。
   // 下面的判断主要是考虑到socket连接可能中断或者其他的因素，可以重新发送此条消息。
+  if (agentData === undefined) return // 当发送信息为undefined时，初始化接收函数就直接返回，不必发送空的消息
   switch (webSocket.readyState) {
     // CONNECTING：值为0，表示正在连接。
     case webSocket.CONNECTING:

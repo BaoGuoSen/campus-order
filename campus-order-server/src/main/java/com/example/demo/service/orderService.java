@@ -16,6 +16,7 @@ public interface orderService {
 	
 	// 查
 	List<order> getOrderByStoreId(String storeId);
+	List<order> getOrderByRiderId(String riderId);
 	
 	order getOrderById(String id);
 	

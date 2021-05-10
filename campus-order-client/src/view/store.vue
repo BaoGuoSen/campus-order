@@ -83,6 +83,7 @@
 export default {
   data () {
     return {
+      wsUrl: 'ws://127.0.0.1:8080/ws/',
       isEdit: false,
       drawer: false,
       store: '',
@@ -93,6 +94,13 @@ export default {
         location: ''
       }
     }
+  },
+  created () {
+    this.userinit()
+    this.wsUrl = this.wsUrl + this.user.id
+    console.log(this.wsUrl)
+    this.socket.initWebSocket(this.wsUrl)
+    this.websocketSend() // 自定义接收函数初始化
   },
   computed: {
     role () {
@@ -106,13 +114,25 @@ export default {
     }
   },
   mounted () {
-    this.user.id = sessionStorage.getItem('userId')
-    this.user.userName = sessionStorage.getItem('userName')
-    this.user.type = sessionStorage.getItem('userType')
-    this.user.location = sessionStorage.getItem('userLocation')
     this.getStore()
   },
   methods: {
+    websocketSend (data) {
+      this.socket.sendSock(data, this.onmessage)
+    },
+    onmessage (data) {
+      this.$message('收到新订单了')
+      console.log(data, 'rider onmessage')
+      this.key = new Date().getTime()
+    },
+    userinit () {
+      this.user.id = sessionStorage.getItem('userId')
+      this.user.userName = sessionStorage.getItem('userName')
+      this.user.type = sessionStorage.getItem('userType')
+      this.user.location = sessionStorage.getItem('userLocation')
+      this.user.lng = sessionStorage.getItem('lng')
+      this.user.lat = sessionStorage.getItem('lat')
+    },
     drawerClose () {
       this.drawer = false
       this.isEdit = false
